@@ -116,3 +116,19 @@ script-driven so that the pipeline is understandable, testable and auditable.
 
 For production, a durable workflow engine should govern retries, state,
 approvals and audit trails.
+
+### LP-009: Private GitHub Backup Established
+
+The root lab workspace has been committed and pushed to the private repository:
+
+`kenilim/enterprise-ai-lab`
+
+The root repository tracks reusable documentation, scripts, templates,
+configuration files and pilot scaffolding.
+
+Raw evidence, secrets, authentication files, runtime logs and model weights are
+excluded.
+
+The working rule is:
+
+`review → stage → scan → commit → push → verify visibility`
