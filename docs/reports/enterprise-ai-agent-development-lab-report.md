@@ -132,3 +132,27 @@ excluded.
 The working rule is:
 
 `review → stage → scan → commit → push → verify visibility`
+
+### LP-010: OpenAI-Backed OpenCode Development Route Validated
+
+The personal-lab development route has been validated:
+
+`VS Code in Ubuntu WSL → OpenCode → ChatGPT OAuth plugin → OpenAI GPT-5.4`
+
+The controlled test returned the required response without modifying tracked
+files.
+
+Recorded model-level usage:
+
+- Model: `openai/gpt-5.4`
+- Messages: `1`
+- Input tokens: approximately `2.3K`
+- Output tokens: `29`
+- Cache read: approximately `4.1K`
+- Reported cost: `$0.0000`
+
+The earlier `openai/gpt-5.2-codex` smoke test failed because the model was not
+supported through the ChatGPT-account route.
+
+The enterprise lesson is that every model-provider-authentication combination
+requires an active validation test.
