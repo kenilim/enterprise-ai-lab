@@ -1,0 +1,57 @@
+# Secrets and credentials
+.env
+.env.*
+**/.env
+**/.env.*
+auth.json
+**/auth.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Windows download metadata
+*:Zone.Identifier
+
+# Local raw evidence
+**/input/inbox/**
+**/input/processed/**
+**/input/rejected/**
+**/work/**
+**/output/**
+
+# Runtime logs and metrics
+logs/**
+**/logs/**
+**/metrics/**
+
+# Keep folder placeholders where required
+!logs/.gitkeep
+!**/logs/.gitkeep
+!**/metrics/.gitkeep
+!**/input/inbox/.gitkeep
+!**/input/processed/.gitkeep
+!**/input/rejected/.gitkeep
+!**/work/.gitkeep
+!**/output/.gitkeep
+
+# Python
+.venv/
+**/.venv/
+__pycache__/
+*.pyc
+
+# Node.js
+node_modules/
+**/node_modules/
+
+# Editor and operating-system files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Model weights and large binaries
+*.gguf
+*.safetensors
+*.bin
+models/

@@ -1,0 +1,23 @@
+# Runtime logs
+logs/
+metrics/
+
+# Raw evidence and generated working files
+input/inbox/
+input/processed/
+input/rejected/
+work/
+output/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node.js
+node_modules/
+
+# Secrets
+.env
+.env.*
+auth.json

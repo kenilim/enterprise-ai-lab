@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "enabled_providers": ["ollama"],
+  "model": "ollama/qwen3:14b",
+  "small_model": "ollama/qwen3:14b",
+  "share": "disabled",
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "pwd": "allow",
+      "ls *": "allow",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "rm -rf *": "deny"
+    }
+  },
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama on Windows Host",
+      "options": {
+        "baseURL": "{env:OLLAMA_BASE_URL}"
+      },
+      "models": {
+        "qwen3:14b": {
+          "name": "Qwen3 14B Local"
+        },
+        "qwen3-vl:8b": {
+          "name": "Qwen3 VL 8B Local"
+        },
+        "mistral:latest": {
+          "name": "Mistral 7B Local"
+        }
+      }
+    }
+  }
+}
