@@ -956,3 +956,40 @@ Export:
 - timing information
 
 Then review extraction quality before processing additional formats.
+
+## LP-014: Email Ingestion Requires a Separate Branch
+
+### Finding
+
+Docling is the preferred first-pass document parser, but it is not the
+universal parser.
+
+The current router handles:
+
+| Format | Current handling |
+|---|---|
+| `.eml` | Python standard-library email parser |
+| `.msg` | Deferred |
+| Attachments | Counted for `.eml`; recursive routing later |
+| Nested threads | Normalisation later |
+
+### Learning Point
+
+Enterprise ingestion must remain modular:
+
+`file type → explicit extractor → normalised evidence → provenance → retrieval`
+
+### Deferred Evaluation
+
+Microsoft Outlook `.msg` support will be evaluated after the main
+evidence-to-OpenSpec learning flow is complete.
+
+Possible candidate:
+
+`extract-msg`
+
+### Current Priority
+
+Complete:
+
+`multi-format extraction → normalisation → conflict detection → OpenSpec proposal → human review`
