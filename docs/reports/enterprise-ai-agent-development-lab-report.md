@@ -177,3 +177,40 @@ OpenSpec now provides the structured handoff layer:
 
 The initial empty OpenSpec directories were preserved with `.gitkeep`
 placeholders so that the baseline structure remains visible in Git.
+
+### LP-012: Enterprise Project Intelligence Workspace Vision
+
+The lab target has expanded from a document parser into an enterprise project
+intelligence workspace.
+
+The intended user experience is a ChatGPT-style internal web application where
+a product manager creates a project, uploads unstructured files, asks questions,
+inspects evidence, generates specifications, reviews impact analysis after new
+documents arrive and approves incremental tasks for development agents.
+
+The model is not the system of record.
+
+The controlled flow is:
+
+`immutable evidence → local parsing → grounded retrieval → versioned specification proposal → human approval → incremental development handoff`
+
+### LP-013: Local Docling Ingestion Toolkit Installed
+
+A dedicated CPU-only document-ingestion environment has been created under:
+
+`projects/01-doc-to-spec-pilot/.venv`
+
+Installed components include:
+
+- `docling 2.97.0`
+- `python-docx 1.2.0`
+- `python-pptx 1.0.2`
+- `openpyxl 3.1.5`
+- `pandas 3.0.3`
+- `pillow 12.2.0`
+- `torch 2.12.0+cpu`
+
+No document extraction has run yet.
+
+The next experiment is the first CircuitFit DOCX conversion into Markdown and
+lossless JSON.
