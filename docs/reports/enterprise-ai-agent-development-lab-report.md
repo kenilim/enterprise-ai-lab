@@ -245,3 +245,100 @@ test assumptions before committing larger teams.
 ### Requirements Record
 
 `docs/requirements/product-manager-copilot-learning-journey-requirements.md`
+## LP-016: Traceability Must Explain Whether a Production Issue Is Actually a Bug
+
+### Finding
+
+A production incident is not always an implementation defect.
+
+Sometimes the software behaves exactly as specified, but the approved
+requirement, task or acceptance criterion was incomplete or wrong.
+
+### Enterprise Reality
+
+This is common in large software programmes.
+
+One team may report a bug.
+
+Another team may point out that the delivered behaviour matched the approved
+scope.
+
+The system needs enough lineage to determine what happened.
+
+### Required Traceability Spine
+
+`source evidence → requirement → design decision → user story → acceptance criterion → task → code commit → automated test → release artefact → production incident`
+
+### Root-Cause Categories
+
+- implementation defect
+- test defect
+- missing requirement
+- incorrect requirement
+- ambiguous requirement
+- design mismatch
+- regression gap
+- production-learning gap
+
+### Learning Point
+
+Product Manager CoPilot should not only generate requirements.
+
+It should preserve the history needed to explain why a requirement, task,
+test or production behaviour exists.
+
+## LP-017: Human Product Judgement, Challenge and Debate Shaped the Journey
+
+### Finding
+
+This lab was not generated from one prompt.
+
+The product manager repeatedly challenged and redirected the learning path.
+
+Examples:
+
+- requiring an air-gap-ready open-source-first architecture
+- insisting on realistic multi-format evidence
+- questioning whether manual scripts should become agent tools
+- preserving OpenSpec as a controlled specification layer
+- exposing Docling email-format limitations
+- requiring repository secret scanning before public sharing
+- renaming the north-star product to Product Manager CoPilot
+- requiring production-incident traceability
+
+### Learning Point
+
+AI can accelerate research, prototyping, scripting and documentation.
+
+It still needs a product builder with experience and product taste to frame the
+problem, debate trade-offs and decide what matters.
+## LP-018: Preserve Attribution for Human Insight, Copilot Recommendation and Experiment Evidence
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+The repository should not read like a one-prompt artefact.
+
+This journey was shaped through repeated product judgement, challenge, debate,
+experiments and decisions.
+
+### Documentation Rule
+
+Each major learning point should identify one or more origins:
+
+- `Product-manager insight`
+- `Copilot recommendation`
+- `Experiment result`
+- `Known limitation`
+- `Decision`
+
+### Learning Point
+
+The value is not merely that an AI copilot generated scripts.
+
+The value is that a product builder used experience and product taste to decide
+which problem to solve, which assumptions to challenge and which experiments to
+run.
