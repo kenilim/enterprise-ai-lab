@@ -49,3 +49,17 @@ Store the presentation under:
 - 16:9 presentation layout
 - browser fullscreen mode
 - print-to-PDF support
+
+## Version 0.3
+
+The north-star product is now called:
+
+`Product Manager CoPilot`
+
+Version 0.3 adds:
+
+- the non-technical product-builder learning journey
+- the product manager's role in defining requirements and controls
+- the AI copilot's role in research, explanation and troubleshooting
+- the requirements-led experimentation narrative
+- the public-repository safety context

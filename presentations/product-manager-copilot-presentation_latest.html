@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Manager CoPilot — Presentation</title>
+<style>
+:root {
+  --bg:#07111f;
+  --panel:#0e2033;
+  --panel2:#10283f;
+  --ink:#edf6ff;
+  --muted:#9fb4c8;
+  --line:rgba(255,255,255,.14);
+  --accent:#51c6b8;
+  --accent2:#78a8ff;
+  --warn:#f1b24b;
+  --danger:#ff7b7b;
+  --ok:#79d697;
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#02070d;color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;height:100%;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center}
+button{font:inherit}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden;background:radial-gradient(circle at 80% 10%,rgba(81,198,184,.14),transparent 30%),radial-gradient(circle at 10% 80%,rgba(120,168,255,.10),transparent 30%),var(--bg)}
+.slide{display:none;position:absolute;inset:0;padding:2.2vh 2vw}
+.slide.active{display:block}
+.slide-inner{width:min(94vw,177.78vh);height:min(52.875vw,94vh);aspect-ratio:16/9;margin:auto;background:linear-gradient(140deg,rgba(14,32,51,.97),rgba(7,17,31,.98));border:1px solid var(--line);box-shadow:var(--shadow);position:relative;padding:3.2% 4.5% 3.4%;overflow:hidden}
+.slide-inner:before{content:"";position:absolute;right:-8%;top:-18%;width:38%;height:65%;border:1px solid rgba(81,198,184,.22);border-radius:50%;transform:rotate(-22deg)}
+.slide-inner:after{content:"";position:absolute;right:-16%;top:-4%;width:38%;height:65%;border:1px solid rgba(120,168,255,.15);border-radius:50%;transform:rotate(-22deg)}
+.topline,footer{display:flex;justify-content:space-between;color:var(--muted);font-size:clamp(9px,1vw,14px);letter-spacing:.12em;text-transform:uppercase}
+.topline{padding-bottom:1.2%;border-bottom:1px solid var(--line)}
+footer{position:absolute;left:4.5%;right:4.5%;bottom:2%;font-size:clamp(8px,.75vw,12px);letter-spacing:.08em}
+header{position:relative;z-index:1;padding:2.1% 0 1.8%}
+h1{margin:0;font-size:clamp(26px,3vw,54px);line-height:1.02;max-width:88%}
+h2{font-size:clamp(20px,2.2vw,38px);line-height:1.15;margin:.5rem 0}
+h3{font-size:clamp(14px,1.25vw,23px);margin:0 0 .5em;color:#fff}
+p,li,td,th,small{font-size:clamp(11px,1.1vw,18px);line-height:1.36}
+.subtitle{margin:.55em 0 0;color:var(--accent);font-size:clamp(13px,1.25vw,22px)}
+main{position:relative;z-index:1;height:76%;overflow:hidden}
+.hero-grid,.two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:3.5%;align-items:center;height:100%}
+.hero-copy,.lead{font-size:clamp(15px,1.5vw,26px);color:var(--accent);margin:0 0 .7em}
+.hero-statement{font-size:clamp(25px,2.65vw,48px);max-width:95%}
+.pill-row{display:flex;gap:.6em;flex-wrap:wrap;margin-top:1.6em}
+.pill{border:1px solid rgba(81,198,184,.45);color:#cffff8;background:rgba(81,198,184,.08);border-radius:30px;padding:.45em .8em;font-size:clamp(10px,.9vw,15px)}
+.cover-panel{background:linear-gradient(150deg,rgba(81,198,184,.17),rgba(120,168,255,.08));border:1px solid rgba(81,198,184,.35);padding:2em;border-radius:18px}
+.cover-label{text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-size:clamp(11px,.9vw,15px)}
+.cover-value{font-size:clamp(25px,2.2vw,42px);font-weight:700;margin:.5em 0}
+.cover-meta{color:var(--muted);font-size:clamp(12px,1vw,16px)}
+.cover-divider{border-top:1px solid var(--line);margin:1.5em 0}
+.stack{display:grid;gap:1em}
+.card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:1em 1.1em}
+.card.accent{border-color:rgba(81,198,184,.5);background:rgba(81,198,184,.08)}
+.card div{font-size:clamp(11px,1vw,17px);color:#c7d7e6;line-height:1.38}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1em;height:100%;align-content:start}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:.9em;align-content:start}
+.signal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1em;margin-top:1em}
+.signal{border:1px solid rgba(120,168,255,.35);background:rgba(120,168,255,.08);padding:1.25em 1em;border-radius:12px;text-align:center;font-size:clamp(12px,1.2vw,20px);font-weight:700}
+.bottom-note{position:absolute;bottom:0;color:var(--muted);border-left:4px solid var(--accent);padding-left:1em;max-width:90%}
+.failure-chain{display:grid;gap:.65em;margin-top:.5em}
+.failure-chain div{display:flex;align-items:center;gap:1em;padding:.7em 1em;background:rgba(255,255,255,.045);border-left:4px solid var(--danger);border-radius:8px}
+.failure-chain span{color:var(--danger);font-weight:800;font-size:1.2em}
+.callout{margin-top:1.1em;border-left:4px solid var(--accent);background:rgba(81,198,184,.08);padding:.8em 1em;font-size:clamp(12px,1.15vw,18px);line-height:1.35}
+.callout.danger{border-color:var(--danger);background:rgba(255,123,123,.08)}
+.mock-shell{height:93%;display:grid;grid-template-columns:24% 76%;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0a1726}
+.mock-sidebar{padding:1em;border-right:1px solid var(--line);background:rgba(0,0,0,.18)}
+.mock-brand{font-weight:800;color:var(--accent);font-size:1.1em;margin-bottom:1em}
+.mock-btn,.mock-item{padding:.75em .8em;border-radius:8px;margin:.35em 0;font-size:clamp(10px,.9vw,15px)}
+.mock-btn{border:1px solid rgba(81,198,184,.4)}
+.mock-item.active{background:rgba(81,198,184,.12);color:#d7fffa}
+.mock-main{padding:1.1em;display:flex;flex-direction:column}
+.mock-header{font-weight:800;border-bottom:1px solid var(--line);padding-bottom:.8em}
+.mock-header span{float:right;color:var(--muted);font-weight:400;font-size:.85em}
+.chat-bubble{max-width:78%;padding:.85em 1em;margin:1em 0;border-radius:12px;line-height:1.35;font-size:clamp(11px,1vw,17px)}
+.chat-bubble.user{align-self:flex-end;background:rgba(120,168,255,.18)}
+.chat-bubble.ai{background:rgba(81,198,184,.12);border:1px solid rgba(81,198,184,.25)}
+.chat-bubble small{color:var(--muted)}
+.mock-input{margin-top:auto;border:1px solid var(--line);border-radius:10px;padding:.9em;color:var(--muted)}
+.big-rule{border:1px solid rgba(241,178,75,.45);background:rgba(241,178,75,.08);padding:1.5em;border-radius:16px}
+.rule-tag{color:var(--warn);letter-spacing:.14em;font-size:.8em;font-weight:800}
+.flow{display:flex;flex-wrap:wrap;gap:.7em;align-content:center}
+.flow-step{flex:1 1 17%;min-width:140px;border:1px solid rgba(81,198,184,.3);background:rgba(81,198,184,.07);border-radius:12px;padding:.9em .85em;text-align:center;font-size:clamp(10px,1vw,17px);font-weight:700;position:relative}
+.flow-step:not(:last-child):after{content:"→";position:absolute;right:-.65em;top:50%;transform:translateY(-50%);color:var(--accent);font-size:1.4em}
+.trace{display:grid;grid-template-columns:repeat(7,1fr);gap:.65em;margin-top:2em}
+.trace div{border-top:4px solid var(--accent2);background:rgba(120,168,255,.08);padding:1em .7em;min-height:150px}
+.trace span{display:block;color:var(--accent2);font-weight:800;font-size:.82em}
+.trace b{display:block;margin:.5em 0}
+.trace small{display:block;color:var(--muted);font-size:.78em}
+.arch{margin-top:.5em}
+.arch-row{display:flex;gap:1em;justify-content:center}
+.arch-box{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--line);padding:1em 1.1em;border-radius:12px;text-align:center;font-size:clamp(14px,1.3vw,21px);font-weight:800}
+.arch-box small{display:block;color:var(--muted);font-weight:400;margin-top:.4em}
+.arch-box.wide{max-width:85%}
+.arch-box.primary{border-color:rgba(81,198,184,.45);background:rgba(81,198,184,.10)}
+.arch-arrow{text-align:center;color:var(--accent);font-size:clamp(15px,1.5vw,26px);padding:.35em}
+.answer-card{background:rgba(255,255,255,.045);border:1px solid var(--line);padding:1.3em;border-radius:14px}
+.answer-card p{margin:.35em 0 1em}
+.evidence-list{display:grid;gap:.45em}
+.evidence-list div{display:grid;grid-template-columns:13% 87%;background:rgba(120,168,255,.06);padding:.65em}
+.evidence-list span{color:#c9d8e8}
+.confidence{color:var(--ok)!important;font-weight:800}
+.table-wrap{height:100%;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:clamp(10px,.93vw,16px)}
+th{background:rgba(81,198,184,.14);color:#d9fff9;text-align:left}
+th,td{border:1px solid var(--line);padding:.65em .7em;vertical-align:top}
+td{color:#cbd9e6}
+code{font-family:Consolas,monospace;color:#cffff8;background:rgba(81,198,184,.08);padding:.05em .25em;border-radius:4px}
+.check-list{padding-left:1.1em}
+.check-list li{margin:.35em 0}
+.timeline{display:grid;gap:.58em}
+.timeline div{display:grid;grid-template-columns:16% 31% 53%;align-items:center;border-left:4px solid var(--accent2);background:rgba(120,168,255,.06);padding:.68em 1em}
+.timeline span{color:var(--accent2);font-weight:800}
+.timeline small{color:var(--muted)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1.2em}
+.compare-box{border-radius:14px;padding:1.1em 1.2em;border:1px solid var(--line)}
+.compare-box.good{background:rgba(121,214,151,.08);border-color:rgba(121,214,151,.4)}
+.compare-box.bad{background:rgba(255,123,123,.08);border-color:rgba(255,123,123,.4)}
+.tree{font:clamp(11px,1.05vw,17px)/1.42 Consolas,monospace;background:rgba(0,0,0,.22);padding:1em;border:1px solid var(--line);border-radius:12px;color:#d9e6f2}
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9em}
+.status{padding:1em;border-radius:10px;font-weight:800;font-size:clamp(11px,1vw,17px)}
+.status.done{background:rgba(121,214,151,.08);border:1px solid rgba(121,214,151,.35);color:#cffff0}
+.status.next{background:rgba(241,178,75,.11);border:1px solid rgba(241,178,75,.45);color:#ffe2a8}
+.status.later{background:rgba(255,255,255,.045);border:1px solid var(--line);color:#c5d3e0}
+.next-exp{display:grid;place-items:center;margin-top:1em}
+.next-file{border:1px solid rgba(120,168,255,.45);background:rgba(120,168,255,.10);padding:1em 1.3em;border-radius:12px;font-weight:800;font-size:clamp(17px,1.6vw,27px)}
+.next-arrow{font-size:2em;color:var(--accent);padding:.25em}
+.next-output{display:grid;grid-template-columns:repeat(4,1fr);gap:1em;width:100%}
+.next-output span{text-align:center;padding:1em;border:1px solid rgba(81,198,184,.35);background:rgba(81,198,184,.08);border-radius:10px;font-weight:800}
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:.8em}
+.road{padding:.95em;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);min-height:135px}
+.road.active{border-color:rgba(81,198,184,.45);background:rgba(81,198,184,.08)}
+.road span{display:block;color:var(--accent);font-weight:900;font-size:1.2em}
+.road b{display:block;margin:.4em 0}
+.road small{color:var(--muted)}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1em}
+.value-grid div{padding:1.2em;border:1px solid rgba(81,198,184,.32);background:rgba(81,198,184,.07);border-radius:12px;min-height:120px}
+.value-grid b,.value-grid span{display:block}
+.value-grid span{color:#c7d7e6;margin-top:.5em;font-size:clamp(11px,1vw,17px);line-height:1.35}
+.discussion{display:grid;grid-template-columns:repeat(2,1fr);gap:1em}
+.discussion div{padding:1.15em;border-left:4px solid var(--accent2);background:rgba(120,168,255,.07);font-size:clamp(13px,1.2vw,21px);line-height:1.25}
+.controls{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;display:flex;gap:.5em;z-index:30;background:rgba(1,5,10,.75);border:1px solid var(--line);backdrop-filter:blur(8px);padding:.45em;border-radius:30px}
+.controls button{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);border-radius:20px;padding:.45em .8em;cursor:pointer}
+.controls button:hover{background:rgba(81,198,184,.18)}
+.progress{position:fixed;left:0;top:0;height:4px;background:var(--accent);z-index:40;transition:width .2s}
+.help{position:fixed;right:12px;bottom:12px;color:var(--muted);font-size:12px;z-index:20}
+@media (max-width:900px){
+  .slide{padding:0}
+  .slide-inner{width:100vw;height:56.25vw;margin-top:calc((100vh - 56.25vw)/2);border:none}
+}
+@media print {
+  html,body{height:auto;overflow:visible;background:white}
+  .deck{height:auto;background:white}
+  .slide{display:block!important;position:relative;padding:0;page-break-after:always}
+  .slide-inner{width:13.333in;height:7.5in;box-shadow:none;margin:0;border:none}
+  .controls,.progress,.help{display:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+    <section class="slide" data-index="1">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>ENTERPRISE AGENTIC AI DEVELOPMENT LAB</span>
+          <span>01 / 35</span>
+        </div>
+        <header>
+          <h1>Product Manager CoPilot</h1>
+          <p class='subtitle'>Open-source-first, air-gap-ready evidence-to-application workflow</p>
+        </header>
+        <main>
+    <div class="hero-grid">
+      <div>
+        <p class="hero-copy">A hands-on lab to solve the enterprise problem nobody should ignore:</p>
+        <h2 class="hero-statement">How do we turn fragmented project information into grounded requirements, approved specifications, bounded development tasks and tested software?</h2>
+        <div class="pill-row">
+          <span class="pill">Unstructured documents</span>
+          <span class="pill">Project memory</span>
+          <span class="pill">Human approval</span>
+          <span class="pill">Agentic development</span>
+        </div>
+      </div>
+      <div class="cover-panel">
+        <div class="cover-label">Evergreen presentation</div>
+        <div class="cover-value">Checkpoint: Step 14B</div>
+        <div class="cover-meta">Pre-extraction baseline complete</div>
+        <div class="cover-divider"></div>
+        <div class="cover-meta">Prepared for internal knowledge sharing</div>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+
+    <section class="slide" data-index="2">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>02 / 35</span>
+        </div>
+        <header>
+          <h1>Built hands-on by a non-technical product person</h1>
+          <p class="subtitle">Basic and dated coding knowledge. Clear requirements. AI copilot. Step-by-step experimentation.</p>
+        </header>
+        <main>
+          <div class="two-col">
+            <div class="stack">
+              <article class="card accent">
+                <h3>What the product manager contributed</h3>
+                <div>Problem framing, north-star vision, requirements, constraints, sequencing, review gates and judgement.</div>
+              </article>
+              <article class="card">
+                <h3>What the AI copilot contributed</h3>
+                <div>Research, explanations, script generation, troubleshooting, documentation and iteration.</div>
+              </article>
+              <article class="card">
+                <h3>What this tests</h3>
+                <div>Whether a product builder can independently learn enough to prototype and evaluate an enterprise agentic workflow.</div>
+              </article>
+            </div>
+            <div class="big-rule">
+              <div class="rule-tag">PRACTICAL SHIFT</div>
+              <h2>Product builders can attempt more of the delivery journey themselves.</h2>
+              <p>Not because engineering expertise is obsolete.</p>
+              <p><b>Because disciplined requirements and a capable copilot compress the learning loop.</b></p>
+            </div>
+          </div>
+        </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Hands-on learning journey</span>
+        </footer>
+      </div>
+    </section>
+
+    <section class="slide" data-index="3">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>03 / 35</span>
+        </div>
+        <header>
+          <h1>Requirements drove the entire learning journey</h1>
+          <p class="subtitle">The copilot generated steps. The product manager defined what mattered.</p>
+        </header>
+        <main>
+          <div class="grid-3">
+            <article class="card accent"><h3>Problem requirement</h3><div>Solve fragmented project knowledge and hallucinated requirements before coding begins.</div></article>
+            <article class="card"><h3>Architecture requirement</h3><div>Prefer open-source and replaceable components suitable for an air-gapped enterprise environment.</div></article>
+            <article class="card"><h3>Governance requirement</h3><div>Preserve provenance, version changes and require human approval gates.</div></article>
+            <article class="card"><h3>Learning requirement</h3><div>Explain every installation, failure, limitation and decision in plain language.</div></article>
+            <article class="card"><h3>Documentation requirement</h3><div>Maintain README, ADRs, checkpoints, scripts, evergreen reports and an offline presentation.</div></article>
+            <article class="card"><h3>Safety requirement</h3><div>Commit only synthetic or sanitised assets and scan the public repository for secrets.</div></article>
+          </div>
+        </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Requirements-led experimentation</span>
+        </footer>
+      </div>
+    </section>
+
+
+    
+    <section class="slide" data-index="4">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>04 / 35</span>
+        </div>
+        <header>
+          <h1>What this experiment is actually testing</h1>
+          <p class='subtitle'>Not another chatbot. Not one-shot vibe coding.</p>
+        </header>
+        <main>
+    <div class="two-col">
+      <div>
+        <p class="lead">The core hypothesis:</p>
+        <h2>Reliable software delivery requires a governed evidence layer before any coding agent is allowed to act.</h2>
+      </div>
+      <div class="stack">
+        <article class="card "><h3>Primary learning focus</h3><div>Convert messy enterprise information into traceable, approved specifications before coding begins.</div></article><article class="card "><h3>Delivery method</h3><div>Use the traditional 4D lifecycle: Discover, Define, Develop, Test & Deploy.</div></article><article class="card "><h3>Enterprise constraint</h3><div>Prefer open-source and air-gap-compatible components. Use OpenAI only as a personal-lab accelerator.</div></article></div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="5">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>05 / 35</span>
+        </div>
+        <header>
+          <h1>The enterprise reality</h1>
+          <p class='subtitle'>Large programmes generate more information than teams can reliably remember</p>
+        </header>
+        <main>
+    <div class="signal-grid">
+      <div class="signal">Meetings</div>
+      <div class="signal">Minutes</div>
+      <div class="signal">Emails</div>
+      <div class="signal">PowerPoints</div>
+      <div class="signal">Word documents</div>
+      <div class="signal">PDFs</div>
+      <div class="signal">Spreadsheets</div>
+      <div class="signal">Screenshots</div>
+      <div class="signal">Whiteboard photos</div>
+      <div class="signal">Chat exports</div>
+      <div class="signal">Department folders</div>
+      <div class="signal">Duplicate versions</div>
+    </div>
+    <p class="bottom-note">The challenge is not document storage. The challenge is retrieving the correct, current and authorised evidence when a decision must be made.</p>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="6">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>06 / 35</span>
+        </div>
+        <header>
+          <h1>Why AI memory fails in real programmes</h1>
+          <p class='subtitle'>The model is not the system of record</p>
+        </header>
+        <main>
+    <div class="failure-chain">
+      <div><span>01</span><b>Relevant evidence is missing, fragmented or poorly indexed</b></div>
+      <div><span>02</span><b>The model retrieves an incomplete picture</b></div>
+      <div><span>03</span><b>The model produces a plausible but unsupported answer</b></div>
+      <div><span>04</span><b>Incorrect requirements enter the delivery pipeline</b></div>
+      <div><span>05</span><b>Wrong design, wrong tasks, wrong code</b></div>
+    </div>
+    <div class="callout danger">Missing evidence → hallucinated requirement → wrong design → wrong task → wrong code → failed delivery</div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="7">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>07 / 35</span>
+        </div>
+        <header>
+          <h1>Proposed product vision</h1>
+          <p class='subtitle'>A ChatGPT-style interface backed by governed project memory</p>
+        </header>
+        <main>
+    <div class="mock-shell">
+      <div class="mock-sidebar">
+        <div class="mock-brand">Project Intelligence</div>
+        <div class="mock-btn">＋ New project</div>
+        <div class="mock-item active">Enterprise AI Lab</div>
+        <div class="mock-item">CircuitFit MVP</div>
+        <div class="mock-item">Payments Modernisation</div>
+      </div>
+      <div class="mock-main">
+        <div class="mock-header">Enterprise AI Lab <span>24 sources · v3 approved spec</span></div>
+        <div class="chat-bubble user">What changed after the new product-owner email?</div>
+        <div class="chat-bubble ai">
+          Three requirements may be affected. One conflict requires review.<br>
+          <small>Sources: PO-email-019 · PRD-v3 §4.2 · Eng-notes-044</small>
+        </div>
+        <div class="mock-input">Ask about this project, upload evidence, or generate a spec revision…</div>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="8">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>08 / 35</span>
+        </div>
+        <header>
+          <h1>What the product manager should be able to do</h1>
+          <p class='subtitle'>Simple experience on top. Strict controls underneath.</p>
+        </header>
+        <main>
+    <div class="grid-3">
+      <article class="card "><h3>1. Create a project</h3><div>Start a governed workspace with its own evidence boundary, members and approved baseline.</div></article><article class="card "><h3>2. Upload unstructured files</h3><div>Add PDFs, DOCX, PPTX, XLSX, emails, screenshots, scans and whiteboard photographs.</div></article><article class="card "><h3>3. Ask questions</h3><div>Chat within the selected project and inspect the sources behind each answer.</div></article><article class="card "><h3>4. Generate delivery artefacts</h3><div>Draft requirements, design documents, user stories, tasks and test plans.</div></article><article class="card "><h3>5. Upload new evidence later</h3><div>Detect what is new, what conflicts and what may affect the current plan.</div></article><article class="card "><h3>6. Approve incremental change</h3><div>Review a versioned diff before development agents receive updated tasks.</div></article>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="9">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>09 / 35</span>
+        </div>
+        <header>
+          <h1>The core design rule</h1>
+          <p class='subtitle'>The LLM interprets evidence. It does not own truth.</p>
+        </header>
+        <main>
+    <div class="two-col">
+      <div class="stack">
+        <article class="card accent"><h3>Immutable evidence</h3><div>Never overwrite originals. Preserve file hash, source metadata, versions and extraction history.</div></article><article class="card "><h3>Derived interpretation</h3><div>Summaries, answers and drafted specs remain explainable outputs linked back to evidence.</div></article><article class="card "><h3>Approved contract</h3><div>Only reviewed requirements and specifications become the development baseline.</div></article>
+      </div>
+      <div class="big-rule">
+        <div class="rule-tag">NON-NEGOTIABLE</div>
+        <h2>New evidence creates a proposed change.</h2>
+        <p>It must never silently rewrite approved requirements or trigger code changes without review.</p>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="10">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>10 / 35</span>
+        </div>
+        <header>
+          <h1>Target end-to-end flow</h1>
+          <p class='subtitle'>Evidence to tested software, with traceability</p>
+        </header>
+        <main><div class="flow"><div class="flow-step">Upload project evidence</div><div class="flow-step">Immutable storage + hash</div><div class="flow-step">Local parsing + OCR</div><div class="flow-step">Hybrid retrieval</div><div class="flow-step">Grounded Q&A + drafting</div><div class="flow-step">Versioned OpenSpec proposal</div><div class="flow-step">Human approval</div><div class="flow-step">Bounded dev-agent tasks</div><div class="flow-step">Automated tests</div><div class="flow-step">Release</div></div></main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="11">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>11 / 35</span>
+        </div>
+        <header>
+          <h1>Traceability spine</h1>
+          <p class='subtitle'>Every decision should be explainable</p>
+        </header>
+        <main>
+    <div class="trace">
+      <div><span>EVID-0042</span><b>Source evidence</b><small>Page, slide, row, paragraph or image region</small></div>
+      <div><span>REQ-0137</span><b>Requirement</b><small>Approved or proposed</small></div>
+      <div><span>STORY-0088</span><b>User story</b><small>Linked to evidence-backed need</small></div>
+      <div><span>AC-0088-1</span><b>Acceptance criterion</b><small>Testable outcome</small></div>
+      <div><span>TASK-0214</span><b>Implementation task</b><small>Bounded change</small></div>
+      <div><span>TEST-0045</span><b>Automated test</b><small>Unit, integration or end-to-end</small></div>
+      <div><span>REL-0009</span><b>Release artefact</b><small>Approved deployment</small></div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="12">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>12 / 35</span>
+        </div>
+        <header>
+          <h1>4D product lifecycle</h1>
+          <p class='subtitle'>Traditional delivery discipline, upgraded for agentic workflows</p>
+        </header>
+        <main>
+    <div class="grid-4">
+      <article class="card "><h3>Discover</h3><div><b>Ingest evidence.</b><br>Map pain points, stakeholders, conflicts and missing information.</div></article><article class="card "><h3>Define</h3><div><b>Create the contract.</b><br>Requirements, user stories, acceptance criteria, design, tasks and risks.</div></article><article class="card "><h3>Develop</h3><div><b>Implement bounded work.</b><br>Plan first. Build one approved story at a time. Review diffs.</div></article><article class="card "><h3>Test & Deploy</h3><div><b>Use deterministic gates.</b><br>Run tests, security checks, regression checks and controlled releases.</div></article>
+    </div>
+    <div class="callout">Agents may draft and recommend. Agents must not approve their own changes or waive failed controls.</div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="13">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>13 / 35</span>
+        </div>
+        <header>
+          <h1>Architecture: user-facing workspace</h1>
+          <p class='subtitle'>The chat interface is only the front door</p>
+        </header>
+        <main>
+    <div class="arch">
+      <div class="arch-row">
+        <div class="arch-box wide primary">Internal Project Workspace UI<br><small>project creation · upload · chat · search · review · diff · approve</small></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box wide">Project & Evidence API<br><small>project IDs · ACLs · metadata · hashes · versions · lineage</small></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box">Immutable Evidence Store<br><small>original files</small></div>
+        <div class="arch-box">Metadata Database<br><small>projects · users · approvals</small></div>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="14">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>14 / 35</span>
+        </div>
+        <header>
+          <h1>Architecture: local intelligence pipeline</h1>
+          <p class='subtitle'>All sensitive project evidence stays inside the governed boundary</p>
+        </header>
+        <main>
+    <div class="arch">
+      <div class="arch-row">
+        <div class="arch-box wide primary">Local ingestion pipeline<br><small>Docling · OCR · Office fallbacks · image extraction · chunking · source references</small></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box wide">Retrieval layer<br><small>lexical search · semantic search · metadata filters · reranking · ACL enforcement</small></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box wide">Internal model gateway<br><small>grounded Q&A · summarisation · contradiction detection · impact analysis · spec drafting</small></div>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="15">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>15 / 35</span>
+        </div>
+        <header>
+          <h1>Architecture: controlled development handoff</h1>
+          <p class='subtitle'>Coding agents receive approved work, not raw chaos</p>
+        </header>
+        <main>
+    <div class="arch">
+      <div class="arch-row">
+        <div class="arch-box wide primary">Versioned product contract<br><small>OpenSpec · requirements · design · user stories · tasks · tests</small></div>
+      </div>
+      <div class="arch-arrow">↓ human approval gate</div>
+      <div class="arch-row">
+        <div class="arch-box wide">Development-agent layer<br><small>OpenCode · bounded tasks · branch controls · permissions · diff review</small></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box wide">Deterministic CI/CD<br><small>unit · integration · e2e · security · regression · release provenance</small></div>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="16">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>16 / 35</span>
+        </div>
+        <header>
+          <h1>How new documents should change the plan</h1>
+          <p class='subtitle'>Automatic impact analysis, never automatic approval</p>
+        </header>
+        <main><div class="flow"><div class="flow-step">New file uploaded</div><div class="flow-step">Hash + ingest locally</div><div class="flow-step">Detect new facts and conflicts</div><div class="flow-step">Map impacted requirements</div><div class="flow-step">Identify affected stories, tasks and tests</div><div class="flow-step">Generate OpenSpec change proposal</div><div class="flow-step">Show human-readable diff</div><div class="flow-step">Human approves or rejects</div><div class="flow-step">Issue incremental dev tasks</div></div></main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="17">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>17 / 35</span>
+        </div>
+        <header>
+          <h1>Grounded project chat</h1>
+          <p class='subtitle'>Answers should explain what is known, what conflicts and what remains uncertain</p>
+        </header>
+        <main>
+    <div class="answer-card">
+      <h3>Question</h3>
+      <p>Should the MVP use browser-local persistence or a backend database?</p>
+      <h3>Grounded answer</h3>
+      <p>The approved MVP baseline uses browser-local persistence. A backend database is out of scope unless the approved design is revised.</p>
+      <div class="evidence-list">
+        <div><b>Evidence</b><span>PRD-v3 §8 · Design-note-011 · Story-003 AC4</span></div>
+        <div><b>Conflict</b><span>An older note requests a backend database. It is marked stale and requires review.</span></div>
+        <div><b>Confidence</b><span class="confidence">High</span></div>
+      </div>
+    </div>
+    <p class="bottom-note">When evidence is insufficient, the correct answer is: “I cannot answer confidently from the available project evidence.”</p>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="18">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>18 / 35</span>
+        </div>
+        <header>
+          <h1>Open-source-first principle</h1>
+          <p class='subtitle'>Personal-lab shortcuts must remain replaceable</p>
+        </header>
+        <main>
+    <div class="two-col">
+      <div>
+        <h3>Personal lab</h3>
+        <div class="flow"><div class="flow-step">Local evidence</div><div class="flow-step">Docling + fallbacks</div><div class="flow-step">Local Ollama models</div><div class="flow-step">Human-reviewed specs</div><div class="flow-step">OpenCode + OpenAI GPT-5.4</div><div class="flow-step">Tests + Docker</div></div>
+      </div>
+      <div>
+        <h3>Air-gapped enterprise target</h3>
+        <div class="flow"><div class="flow-step">Internal evidence store</div><div class="flow-step">Local ingestion workers</div><div class="flow-step">Hybrid retrieval + ACL filters</div><div class="flow-step">Internal model gateway</div><div class="flow-step">Approved local models</div><div class="flow-step">Internal coding agent + CI/CD</div></div>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="19">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>19 / 35</span>
+        </div>
+        <header>
+          <h1>What has been installed on the personal lab</h1>
+          <p class='subtitle'>Validated environment at Step 14B</p>
+        </header>
+        <main>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>Validated state</th></tr></thead>
+        <tbody>
+          <tr><td>Workstation</td><td>AMD Ryzen 9 7900 · ~32 GB RAM · NVIDIA RTX 4070 Ti · ~12 GB VRAM</td></tr>
+          <tr><td>Linux workspace</td><td>WSL2 · Ubuntu 24.04 · <code>/home/kenilim/projects/enterprise-ai-lab</code></td></tr>
+          <tr><td>Editor and runtime</td><td>VS Code WSL · Git · Python 3.12 · Node.js 24 · npm · Docker Desktop</td></tr>
+          <tr><td>Local inference</td><td>Windows Ollama server reachable from WSL · direct API calls validated</td></tr>
+          <tr><td>Development agent</td><td>OpenCode · OpenAI GPT-5.4 route validated for personal-lab coding</td></tr>
+          <tr><td>Spec workflow</td><td>OpenSpec 1.4.1 · propose → explore → apply → sync → archive</td></tr>
+          <tr><td>Governance</td><td>Private GitHub repo · ADRs · checkpoints · timestamped logs · token snapshots</td></tr>
+        </tbody>
+      </table>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="20">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>20 / 35</span>
+        </div>
+        <header>
+          <h1>Local document-ingestion toolkit</h1>
+          <p class='subtitle'>Installed in a dedicated CPU-only virtual environment</p>
+        </header>
+        <main>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Version</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>docling</code></td><td>2.97.0</td><td>First-pass local document conversion</td></tr>
+          <tr><td><code>python-docx</code></td><td>1.2.0</td><td>DOCX-specific fallback inspection</td></tr>
+          <tr><td><code>python-pptx</code></td><td>1.0.2</td><td>PPTX slide, shape and embedded-media inspection</td></tr>
+          <tr><td><code>openpyxl</code></td><td>3.1.5</td><td>XLSX workbook structure and formulas</td></tr>
+          <tr><td><code>pandas</code></td><td>3.0.3</td><td>Tabular processing</td></tr>
+          <tr><td><code>pillow</code></td><td>12.2.0</td><td>Image handling</td></tr>
+          <tr><td><code>torch</code></td><td>2.12.0+cpu</td><td>CPU-only baseline before GPU optimisation</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">Decision: validate native-document extraction on CPU before introducing GPU complexity.</div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="21">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>21 / 35</span>
+        </div>
+        <header>
+          <h1>What Docling is expected to handle</h1>
+          <p class='subtitle'>First-pass parser, not the only parser</p>
+        </header>
+        <main>
+    <div class="grid-3">
+      <article class="card "><h3>PDF</h3><div>Text, layout, reading order, tables and scanned-page workflows.</div></article><article class="card "><h3>DOCX</h3><div>Document structure and content, with python-docx fallback where Office relationships matter.</div></article><article class="card "><h3>PPTX</h3><div>Slide content and structure, with python-pptx fallback for shapes, notes and embedded media.</div></article><article class="card "><h3>XLSX</h3><div>Broad ingestion, with openpyxl and pandas for workbook semantics, formulas and merged cells.</div></article><article class="card "><h3>Images and scans</h3><div>OCR and optional local vision-model enrichment for screenshots and whiteboard photos.</div></article><article class="card "><h3>Embedded artefacts</h3><div>Preserve originals and explicitly flag charts, OLE objects and unsupported semantics.</div></article>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="22">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>22 / 35</span>
+        </div>
+        <header>
+          <h1>Benchmark pack: CircuitFit</h1>
+          <p class='subtitle'>A realistic source pack for the first ingestion experiment</p>
+        </header>
+        <main>
+    <div class="two-col">
+      <div>
+        <h3>Canonical local evidence</h3>
+        <ul class="check-list">
+          <li>AGENTS.md</li>
+          <li>PRODUCT_REQUIREMENTS.md</li>
+          <li>DESIGN_REQUIREMENTS.md</li>
+          <li>TASKS.md</li>
+          <li>SPEC_CHANGE_PROTOCOL.md</li>
+          <li>MODEL_SELECTION.md</li>
+          <li>DEVELOPMENT_HANDOFF.md</li>
+          <li>CircuitFit MVP stress test and spec pack.docx</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Controls already applied</h3>
+        <ul class="check-list">
+          <li>Copied into local immutable raw folder</li>
+          <li>SHA-256 manifest generated</li>
+          <li>Raw files excluded from GitHub</li>
+          <li>Windows Zone.Identifier files removed</li>
+          <li>Safe metadata and scripts pushed to private repo</li>
+        </ul>
+      </div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="23">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>23 / 35</span>
+        </div>
+        <header>
+          <h1>What a realistic synthetic evidence pack should contain</h1>
+          <p class='subtitle'>The benchmark must simulate messy enterprise collaboration</p>
+        </header>
+        <main>
+    <div class="grid-3">
+      <article class="card "><h3>Emails</h3><div>Priority changes, partial requirements, stakeholder disagreements and late clarifications.</div></article><article class="card "><h3>Meeting notes</h3><div>Unstructured decisions, unresolved questions and ambiguous follow-ups.</div></article><article class="card "><h3>PowerPoint</h3><div>Embedded tables, screenshot mock-ups and architecture diagrams.</div></article><article class="card "><h3>Excel</h3><div>Requirements matrices, release checklists and conflicting status fields.</div></article><article class="card "><h3>PDF summaries</h3><div>Stale assumptions, duplicated excerpts and hidden changes.</div></article><article class="card "><h3>Images</h3><div>Crowded whiteboards, hand-drawn workflows and screenshot feedback.</div></article>
+    </div>
+    <div class="callout">The meaningful test is not “can Docling extract text?” It is “can the system detect what is new, stale, contradictory and delivery-relevant?”</div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="24">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>24 / 35</span>
+        </div>
+        <header>
+          <h1>Key experiments completed so far</h1>
+          <p class='subtitle'>Useful failures are part of the architecture</p>
+        </header>
+        <main>
+    <div class="timeline">
+      <div><span>LP-001–003</span><b>Environment validated</b><small>WSL2, Docker and local Ollama inference</small></div>
+      <div><span>LP-004</span><b>Adapter defect isolated</b><small>Direct Ollama API works; OpenCode-to-Ollama streamed output does not reliably surface final content</small></div>
+      <div><span>LP-009</span><b>Private GitHub backup established</b><small>Safe assets pushed, secrets and raw evidence excluded</small></div>
+      <div><span>LP-010</span><b>OpenAI-backed OpenCode route validated</b><small>GPT-5.4 personal-lab development path works</small></div>
+      <div><span>LP-011</span><b>OpenSpec initialised</b><small>Core propose → explore → apply → sync → archive workflow installed</small></div>
+      <div><span>LP-012–013</span><b>Workspace vision and Docling baseline</b><small>Local evidence pipeline installed; no extraction run yet</small></div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="25">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>25 / 35</span>
+        </div>
+        <header>
+          <h1>What we learned from the OpenCode-to-Ollama defect</h1>
+          <p class='subtitle'>A model working through curl is not enough</p>
+        </header>
+        <main>
+    <div class="compare">
+      <div class="compare-box good">
+        <h3>Working</h3>
+        <p>WSL → Windows Ollama → local model</p>
+        <p>Direct native API</p>
+        <p>OpenAI-compatible API</p>
+        <p>Streaming response</p>
+      </div>
+      <div class="compare-box bad">
+        <h3>Broken or incompatible</h3>
+        <p>OpenCode → Ollama adapter</p>
+        <p>Reasoning event appears</p>
+        <p>Final answer not surfaced reliably</p>
+      </div>
+    </div>
+    <div class="callout">Enterprise implication: validate the complete model-server-agent combination, not just the model endpoint.</div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="26">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>26 / 35</span>
+        </div>
+        <header>
+          <h1>Air-gapped environment: what must be added</h1>
+          <p class='subtitle'>The enterprise version needs more than GPU hardware</p>
+        </header>
+        <main>
+    <div class="grid-3">
+      <article class="card "><h3>Controlled import lane</h3><div>Approved package mirrors, container images, model weights, vulnerability feeds and licence reviews.</div></article><article class="card "><h3>Immutable object storage</h3><div>Original files, versions, hashes, retention rules and access controls.</div></article><article class="card "><h3>Metadata database</h3><div>Projects, owners, departments, ACLs, classifications, approvals and lineage.</div></article><article class="card "><h3>Search and retrieval</h3><div>Lexical + vector search, reranking, metadata filters and project isolation.</div></article><article class="card "><h3>Internal model gateway</h3><div>Approved local models, routing, quotas, observability, safety controls and audit logging.</div></article><article class="card "><h3>CI/CD controls</h3><div>Branch policies, deterministic tests, SBOMs, signed artefacts, rollback and release provenance.</div></article>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="27">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>27 / 35</span>
+        </div>
+        <header>
+          <h1>Minimum governance controls</h1>
+          <p class='subtitle'>What prevents a clever prototype from becoming an operational liability</p>
+        </header>
+        <main>
+    <div class="grid-4">
+      <article class="card "><h3>Evidence provenance</h3><div>Every answer links back to source documents, page, slide, sheet, row or image region.</div></article><article class="card "><h3>Access control</h3><div>Retrieve only evidence the user is allowed to see inside the active project.</div></article><article class="card "><h3>Version control</h3><div>Separate approved, proposed, stale, superseded and conflicting information.</div></article><article class="card "><h3>Human approval</h3><div>No autonomous rewrite of requirements, tests or release criteria.</div></article><article class="card "><h3>Observability</h3><div>Log uploads, extraction, retrieval, prompts, outputs, diffs, approvals and agent actions.</div></article><article class="card "><h3>Model validation</h3><div>Actively smoke-test each model, server, auth route and adapter combination.</div></article><article class="card "><h3>Dependency control</h3><div>Mirror packages and models internally; review licences before import.</div></article><article class="card "><h3>Release discipline</h3><div>Agents propose fixes. CI/CD decides whether a build passes.</div></article>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="28">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>28 / 35</span>
+        </div>
+        <header>
+          <h1>Failure handling</h1>
+          <p class='subtitle'>When tests fail, do not blindly patch until green</p>
+        </header>
+        <main>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Failure type</th><th>Correct response</th></tr></thead>
+        <tbody>
+          <tr><td>Implementation defect</td><td>Propose a bounded code fix and rerun relevant tests.</td></tr>
+          <tr><td>Incorrect or incomplete test</td><td>Review the acceptance criterion before changing the test.</td></tr>
+          <tr><td>Ambiguous user story</td><td>Return to the requirement and clarify the story.</td></tr>
+          <tr><td>Design mismatch</td><td>Revisit design.md and update the implementation plan.</td></tr>
+          <tr><td>Requirement change</td><td>Update requirements, stories, design, tasks and tests together.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="29">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>29 / 35</span>
+        </div>
+        <header>
+          <h1>Current repository structure</h1>
+          <p class='subtitle'>The repo is both the learning record and the reproducible lab scaffold</p>
+        </header>
+        <main>
+    <pre class="tree">enterprise-ai-lab/
+├── configs/
+├── docs/
+│   ├── architecture-decisions/
+│   ├── checkpoints/
+│   └── reports/
+├── learnings/
+│   ├── current/
+│   └── exports/
+├── logs/
+├── projects/
+│   ├── 01-doc-to-spec-pilot/
+│   └── 02-app-build-pilot/
+├── shared/
+│   ├── scripts/
+│   └── templates/
+├── opencode.json
+└── README.md</pre>
+    <div class="callout">Private GitHub repo: <code>kenilim/enterprise-ai-lab</code></div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="30">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>30 / 35</span>
+        </div>
+        <header>
+          <h1>Current lab status</h1>
+          <p class='subtitle'>Pre-extraction baseline complete</p>
+        </header>
+        <main>
+    <div class="status-grid">
+      <div class="status done">✓ WSL2 Ubuntu workspace</div>
+      <div class="status done">✓ Docker validation</div>
+      <div class="status done">✓ GitHub private backup</div>
+      <div class="status done">✓ Local Ollama direct inference</div>
+      <div class="status done">✓ OpenAI GPT-5.4 coding route</div>
+      <div class="status done">✓ OpenSpec core workflow</div>
+      <div class="status done">✓ CircuitFit source manifest</div>
+      <div class="status done">✓ Docling CPU-only toolkit</div>
+      <div class="status next">→ First DOCX extraction</div>
+      <div class="status later">○ Multi-format benchmark</div>
+      <div class="status later">○ Hybrid retrieval layer</div>
+      <div class="status later">○ Project workspace web UI</div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="31">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>31 / 35</span>
+        </div>
+        <header>
+          <h1>Immediate next experiment</h1>
+          <p class='subtitle'>Run the first local Docling extraction</p>
+        </header>
+        <main>
+    <div class="next-exp">
+      <div class="next-file">CircuitFit MVP stress test and spec pack.docx</div>
+      <div class="next-arrow">↓</div>
+      <div class="next-output">
+        <span>Markdown export</span>
+        <span>Lossless JSON</span>
+        <span>Extraction metadata</span>
+        <span>Timing metrics</span>
+      </div>
+    </div>
+    <div class="callout">Review extraction quality before processing additional file types or optimising for GPU execution.</div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    
+    <section class="slide" data-index="32">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>32 / 35</span>
+        </div>
+        <header>
+          <h1>Email ingestion needs a separate branch</h1>
+          <p class="subtitle">Docling is the first-pass document parser, not the universal parser</p>
+        </header>
+        <main>
+          <div class="two-col">
+            <div class="stack">
+              <article class="card accent">
+                <h3>What works now</h3>
+                <div><code>.eml</code> files are routed through Python's standard-library email parser. The router preserves headers, body text and attachment count.</div>
+              </article>
+              <article class="card">
+                <h3>Known gap</h3>
+                <div>Microsoft Outlook <code>.msg</code> files are not handled in the current learning phase. This is recorded explicitly rather than hidden.</div>
+              </article>
+              <article class="card">
+                <h3>Evaluate later</h3>
+                <div><code>extract-msg</code> is a possible open-source candidate for Outlook message extraction. Evaluate it after the main evidence-to-OpenSpec learning flow is complete.</div>
+              </article>
+            </div>
+            <div class="big-rule">
+              <div class="rule-tag">LEARNING POINT</div>
+              <h2>Do not force every file through Docling.</h2>
+              <p>Enterprise ingestion should route each format through the right extractor and preserve provenance.</p>
+              <p><b>Email remains important because requirements and approvals often appear there before formal documents are updated.</b></p>
+            </div>
+          </div>
+        </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Known gap: Outlook MSG deferred</span>
+        </footer>
+      </div>
+    </section>
+
+<section class="slide" data-index="33">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>33 / 35</span>
+        </div>
+        <header>
+          <h1>Roadmap</h1>
+          <p class='subtitle'>Build the capability in thin, testable layers</p>
+        </header>
+        <main>
+    <div class="roadmap">
+      <div class="road active"><span>1</span><b>Foundation</b><small>Environment, GitHub, OpenCode, OpenSpec, logging</small></div>
+      <div class="road active"><span>2</span><b>Native DOCX extraction</b><small>Docling baseline with timing and quality review</small></div>
+      <div class="road"><span>3</span><b>Multi-format ingestion</b><small>PDF, PPTX, XLSX, emails, screenshots and scans</small></div>
+      <div class="road"><span>4</span><b>Messy evidence benchmark</b><small>Stale, conflicting and duplicated synthetic evidence</small></div>
+      <div class="road"><span>5</span><b>Retrieval and grounded chat</b><small>Search, metadata filters, citations and uncertainty handling</small></div>
+      <div class="road"><span>6</span><b>Impact analysis</b><small>Detect affected requirements, stories, tasks and tests</small></div>
+      <div class="road"><span>7</span><b>Workspace UI</b><small>Project creation, upload, chat, review, diff and approval</small></div>
+      <div class="road"><span>8</span><b>Enterprise blueprint</b><small>Air-gap import lane, local gateway, observability and CI/CD</small></div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="34">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>34 / 35</span>
+        </div>
+        <header>
+          <h1>What this gives the enterprise</h1>
+          <p class='subtitle'>A safer path from information overload to governed delivery</p>
+        </header>
+        <main>
+    <div class="value-grid">
+      <div><b>Better product memory</b><span>Teams can locate evidence instead of relying on personal recollection.</span></div>
+      <div><b>Lower hallucination risk</b><span>Answers require retrieval, provenance and uncertainty handling.</span></div>
+      <div><b>Controlled change</b><span>New files generate proposed deltas rather than silent rewrites.</span></div>
+      <div><b>Explainable handoff</b><span>Engineering tasks link back to approved stories and source evidence.</span></div>
+      <div><b>Air-gap compatibility</b><span>The target architecture remains open-source-first and locally deployable.</span></div>
+      <div><b>Reusable operating model</b><span>The same pattern can support large programmes across departments.</span></div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+    <section class="slide" data-index="35">
+      <div class="slide-inner">
+        <div class="topline">
+          <span>PRODUCT MANAGER COPILOT</span>
+          <span>35 / 35</span>
+        </div>
+        <header>
+          <h1>Discussion</h1>
+          <p class='subtitle'>Key questions for the next phase</p>
+        </header>
+        <main>
+    <div class="discussion">
+      <div>Which project type should become the first realistic internal pilot?</div>
+      <div>What evidence sources matter most: email, minutes, decks, spreadsheets, scans or chat exports?</div>
+      <div>What data classifications can be ingested in the air-gapped lab?</div>
+      <div>Which approval gates must remain human-owned?</div>
+      <div>Which internal model gateway and retrieval stack are already available?</div>
+      <div>What would constitute a credible proof of value in 8–12 weeks?</div>
+    </div>
+    </main>
+        <footer>
+          <span>Enterprise Agentic AI Development Lab</span>
+          <span>Checkpoint: Step 14B · Pre-extraction baseline</span>
+        </footer>
+      </div>
+    </section>
+    
+</div>
+<div class="controls">
+  <button onclick="prevSlide()">← Prev</button>
+  <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+  <button onclick="window.print()">⎙ Print / PDF</button>
+  <button onclick="nextSlide()">Next →</button>
+</div>
+<div class="help">Arrow keys · Space · Home / End · F for fullscreen</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let index=0;
+function render(){
+  slides.forEach((s,i)=>s.classList.toggle('active',i===index));
+  document.getElementById('progress').style.width=((index+1)/slides.length*100)+'%';
+  location.hash='slide-'+(index+1);
+}
+function nextSlide(){index=Math.min(slides.length-1,index+1);render();}
+function prevSlide(){index=Math.max(0,index-1);render();}
+function toggleFullscreen(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();nextSlide();}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prevSlide();}
+  if(e.key==='Home'){index=0;render();}
+  if(e.key==='End'){index=slides.length-1;render();}
+  if(e.key.toLowerCase()==='f') toggleFullscreen();
+});
+const hash=location.hash.match(/slide-(\d+)/);
+if(hash) index=Math.max(0,Math.min(slides.length-1,Number(hash[1])-1));
+render();
+</script>
+</body>
+</html>

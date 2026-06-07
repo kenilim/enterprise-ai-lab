@@ -214,3 +214,34 @@ No document extraction has run yet.
 
 The next experiment is the first CircuitFit DOCX conversion into Markdown and
 lossless JSON.
+## LP-015: Product Manager CoPilot and the Product-Builder Learning Journey
+
+### Context
+
+This lab is being built hands-on by a non-technical product person with basic
+and dated coding knowledge.
+
+The product manager defined the problem, constraints, north-star vision,
+learning sequence and required controls.
+
+An AI copilot supported research, explanation, script generation,
+troubleshooting, documentation and iteration.
+
+### Learning Point
+
+Product builders with clear requirements and disciplined problem framing can
+independently research, prototype and evaluate more of the delivery stack than
+before.
+
+This does not replace software-engineering expertise.
+
+It creates a stronger product-to-engineering handoff and helps product managers
+test assumptions before committing larger teams.
+
+### North-Star Product Name
+
+`Product Manager CoPilot`
+
+### Requirements Record
+
+`docs/requirements/product-manager-copilot-learning-journey-requirements.md`
