@@ -40,3 +40,20 @@ Open the latest HTML file directly in a browser.
 
 The presentation is designed for 16:9 display and does not require a running
 development environment.
+
+<!-- PMCP_MANAGED_BLOCK:STEP16K3_PRESENTATION:START -->
+## Latest milestone deck
+
+- Latest browser-openable deck: `product-manager-copilot-presentation_latest.html`
+- Latest versioned deck: `product-manager-copilot-presentation_v0.9.html`
+- Milestone: Step 16K.3 canonical knowledge consolidation and return to the OpenSpec pipeline.
+
+Version `v0.9` captures:
+- documentation entropy as a retrieval and hallucination risk;
+- the canonical knowledge spine;
+- the WSL repository boundary;
+- OpenCode as the CircuitFit product-manager workspace;
+- the human-controlled Git checkpoint handoff;
+- anti-hallucination controls beginning before retrieval;
+- the shortest credible route back to the first OpenSpec proposal.
+<!-- PMCP_MANAGED_BLOCK:STEP16K3_PRESENTATION:END -->

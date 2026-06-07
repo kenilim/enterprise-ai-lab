@@ -141,3 +141,55 @@ Use concise dated entries with:
 - **Learning Point:** Design tooling should enter only after evidence quality,
   normalisation and OpenSpec foundations are ready.
 - **Decision:** Record Figma MCP in backlog only; do not explore it in Step 16.
+
+<!-- PMCP_MANAGED_BLOCK:STEP16K3_LEARNING_REFRESH:START -->
+## 2026-06-07 — Step 16K.3: canonical knowledge spine and return to the OpenSpec pipeline
+
+### 1. OpenCode-first product-manager workspace
+- **Origin:** Product-manager insight
+- **Finding:** OpenCode is most valuable when it simulates the future Product Manager CoPilot workspace for the CircuitFit document-to-specification flow. It should not become the place where broader lab whitepapers and presentation decks are maintained.
+- **Learning Point:** Separate the product simulation from the surrounding learning-lab maintenance. The product-manager persona should use OpenCode for evidence ingestion, quality review, normalisation, conflict detection and the eventual OpenSpec proposal.
+- **Decision:** Keep OpenCode focused on the CircuitFit workflow. Use the external educator-copilot workflow to generate milestone learning packages, presentations and installation scripts.
+
+### 2. WSL repository boundary
+- **Origin:** Experiment result and product-manager insight
+- **Finding:** Earlier convenience flows used Windows Downloads exports and recursive filesystem scans. These created avoidable friction and weak project-boundary discipline.
+- **Learning Point:** A governed agent should operate inside a clearly established workspace boundary. Local logs can remain inside the WSL repository boundary while staying excluded from Git.
+- **Decision:** Treat `/home/kenilim/projects/enterprise-ai-lab` as the default project boundary. Use Windows Downloads only as an optional transfer location for externally generated packages.
+
+### 3. Documentation entropy
+- **Origin:** Knowledge-structure audit
+- **Finding:** The repository accumulated approximately 154 Markdown files, around 20 checkpoints and multiple overlapping handoff records.
+- **Learning Point:** Markdown is not automatically a knowledge system. Too many competing documents create retrieval noise, stale-context risk and a new form of hallucination exposure.
+- **Decision:** Use a canonical knowledge spine: `docs/README.md`, `docs/CURRENT_STATE.md`, `learnings/LEARNING_JOURNAL.md` and the relevant project README. Load the smallest correct context instead of every Markdown file.
+
+### 4. Validation controls need validation
+- **Origin:** Failure lesson
+- **Finding:** A whitespace-validation command behaved differently for tracked and untracked files, and a broad folder search encountered protected Windows paths.
+- **Learning Point:** A control is not trustworthy merely because it executed. Deterministic validation logic must be tested against edge cases and constrained to the intended workspace.
+- **Decision:** Keep checks bounded, explicit and repo-local. Distinguish tracked and untracked files when validating changes.
+
+### 5. Human-controlled Git checkpoint
+- **Origin:** Experiment result and known limitation
+- **Finding:** OpenCode correctly prepared and validated changes but its current permission model blocks `git commit` and `git push`.
+- **Learning Point:** Separation of duties is working. A human-controlled checkpoint remains appropriate until a governed allowlisted checkpoint tool is introduced.
+- **Decision:** OpenCode prepares and validates; the human performs the reviewed commit and push from a separate WSL terminal.
+
+### 6. Anti-hallucination controls start before retrieval
+- **Origin:** CircuitFit ingestion-quality review
+- **Finding:** Successful file conversion did not prove reliable extraction quality. XLSX, PPTX, PDF, screenshot and whiteboard artefacts expose different failure modes.
+- **Learning Point:** Weak extraction can become false structured evidence before a model begins reasoning. Hallucination control begins with source quality, extraction quality and explicit normalisation gates.
+- **Decision:** Finish the minimum trustworthy Step 16 extraction-quality remediation, approve eligible evidence, then proceed to normalisation, conflict detection and the first OpenSpec proposal.
+
+### 7. Governance must enable delivery
+- **Origin:** Product-manager insight
+- **Finding:** Step 16 expanded into too many governance and documentation loops, delaying the visible CircuitFit outcome.
+- **Learning Point:** Governance is valuable only when it creates a safe path toward delivery. Production-perfect ingestion is not required for a controlled synthetic OpenSpec experiment.
+- **Decision:** Stop expanding documentation after this milestone. Return to the shortest credible path: minimum extraction remediation → benchmark rerun → eligible-evidence approval → normalisation → conflict detection → first OpenSpec proposal.
+
+### 8. Future design backlog
+- **Origin:** Product-manager exploration
+- **Finding:** Figma MCP may help connect approved product requirements and design requirements to interface design work later.
+- **Learning Point:** Design tooling should be introduced after requirements and the first OpenSpec proposal are ready, not before.
+- **Decision:** Keep Figma MCP as a later design-phase experiment. Do not explore it during the current extraction-quality phase.
+<!-- PMCP_MANAGED_BLOCK:STEP16K3_LEARNING_REFRESH:END -->
