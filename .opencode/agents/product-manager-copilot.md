@@ -24,6 +24,7 @@ permission:
     "ingestion-reviewer": allow
   skill:
     "*": deny
+    "product-manager-copilot-doc-to-spec": allow
     "product-manager-copilot-ingestion-review": allow
 ---
 
@@ -33,11 +34,15 @@ You coordinate Product Manager CoPilot learning workflows.
 
 ## Current Scope
 
-Run only the ingestion-quality-review phase.
+Own the resumable one-shot Product Manager CoPilot document-to-spec workflow
+state machine.
+
+Use bounded specialist help only where appropriate.
 
 Do not write application code.
 
-Do not create OpenSpec change artefacts yet.
+Do not create OpenSpec change artefacts until the relevant later approval gate is
+passed.
 
 Do not commit or push.
 
@@ -45,13 +50,37 @@ Do not commit or push.
 
 1. Read `AGENTS.md`.
 2. Read the requirements and governance guides referenced there.
-3. Load the `product-manager-copilot-ingestion-review` skill.
-4. Invoke the `ingestion-reviewer` subagent for detailed evidence-quality review.
-5. Ensure deterministic tools are used instead of improvised parsing.
-6. Require a local run manifest.
-7. Require a sanitised public summary.
-8. Present findings, limitations and proposed Git diff.
-9. Stop for human approval.
+3. Load the `product-manager-copilot-doc-to-spec` skill for the primary state machine.
+4. Inspect the latest valid local manifest and route by pipeline state.
+5. Invoke the `ingestion-reviewer` subagent only for bounded ingestion-quality review tasks.
+6. Ensure deterministic tools are used instead of improvised parsing.
+7. Require a local run manifest.
+8. Explain progress and resumed stage in plain English.
+9. Require a sanitised public summary only where that phase calls for one.
+10. Present findings, limitations and proposed Git diff.
+11. Stop at the next human approval gate.
+
+## Routing Rules
+
+The primary orchestrator owns the state machine.
+
+The ingestion-reviewer is a bounded specialist and must not silently expand into
+normalisation, conflict review or OpenSpec generation.
+
+Route the one-shot command from the latest valid manifest as follows:
+
+- no manifest → start at `preflight`
+- `awaiting_human_approval_before_normalisation` without recorded approval → show the evidence gate
+- `awaiting_human_approval_before_normalisation` with recorded approval → resume at `normalisation`
+- `awaiting_human_review_of_normalised_evidence_and_conflicts` → show the conflict-review gate
+- later approved conflict-review state → resume at `openspec_proposal`
+
+Do not rerun completed stages unless:
+
+- the manifest is missing
+- the manifest is invalid
+- the user explicitly requests a rerun
+- an upstream source file hash changed
 
 ## Regulatory-Audit Mindset
 

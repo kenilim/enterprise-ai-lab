@@ -1,5 +1,5 @@
 ---
-description: Run the first OpenCode-native Product Manager CoPilot document-to-spec pre-normalisation pipeline for the CircuitFit pilot and stop at the human evidence gate.
+description: Run the resumable one-shot Product Manager CoPilot document-to-spec workflow for the CircuitFit pilot, routing automatically from the latest valid local manifest.
 agent: product-manager-copilot
 ---
 
@@ -11,10 +11,11 @@ Requirements:
 
 1. Read `AGENTS.md`.
 2. Load the `product-manager-copilot-doc-to-spec` skill.
-3. Explain progress in plain English.
-4. Run the deterministic pipeline stages behind the scenes.
-5. Surface material exceptions only.
-6. Stop at the Step 16 evidence-eligibility gate.
-7. Do not generate OpenSpec artefacts yet.
-8. Do not begin evidence normalisation yet.
-9. Do not write application code.
+3. Explain progress and any resumed stage in plain English.
+4. Inspect the latest valid local pipeline manifest and route automatically.
+5. Do not rerun completed stages unless the manifest is missing, invalid, the user explicitly requests a rerun, or an upstream source file hash changed.
+6. Run the required deterministic stage only for the routed phase.
+7. Surface material exceptions only.
+8. Respect recorded human approval as authorising only the next bounded phase.
+9. Keep OpenSpec blocked until the later conflict-review approval state.
+10. Do not write application code.

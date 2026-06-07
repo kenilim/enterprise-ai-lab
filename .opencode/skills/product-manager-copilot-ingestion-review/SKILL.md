@@ -9,6 +9,8 @@ description: Run and review the Product Manager CoPilot multi-format evidence-in
 
 Review a project evidence pack using tested local extraction tools.
 
+This is a bounded specialist skill for ingestion-quality review only.
+
 Do not improvise document parsing when a deterministic script already exists.
 
 Do not implement application code.
@@ -16,6 +18,9 @@ Do not implement application code.
 Do not generate an OpenSpec proposal yet.
 
 Stop for human approval before committing or pushing anything.
+
+Do not take ownership of resumable workflow routing, evidence normalisation,
+conflict review or OpenSpec generation.
 
 ## Inputs
 

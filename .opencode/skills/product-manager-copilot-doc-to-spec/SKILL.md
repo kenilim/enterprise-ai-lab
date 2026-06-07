@@ -1,6 +1,6 @@
 ---
 name: product-manager-copilot-doc-to-spec
-description: Run the first OpenCode-native Product Manager CoPilot document-to-spec pre-normalisation pipeline for the CircuitFit pilot, using deterministic tools behind the scenes and stopping at the human evidence-eligibility gate.
+description: Run the resumable OpenCode-native Product Manager CoPilot document-to-spec workflow for the CircuitFit pilot, routing deterministically from the latest valid manifest and respecting bounded approval gates.
 ---
 
 # Product Manager CoPilot Document-to-Spec Pipeline
@@ -9,9 +9,11 @@ description: Run the first OpenCode-native Product Manager CoPilot document-to-s
 
 Run one governed OpenCode-native workflow for the CircuitFit pilot:
 
-`evidence pack → extraction → quality audit → eligibility summary → human gate`
+`evidence pack → extraction → quality audit → eligibility summary → human gate → normalisation → conflict review → OpenSpec proposal`
 
-This skill stops before normalisation.
+The primary orchestrator owns the state machine.
+
+This skill defines the routing rules and deterministic boundaries.
 
 ## Pipeline stages
 
@@ -21,6 +23,28 @@ This skill stops before normalisation.
 4. image decisions
 5. eligibility summary
 6. human gate
+7. normalisation
+8. conflict review
+9. OpenSpec proposal
+
+## Resumable routing rules
+
+Inspect the latest valid local manifest first.
+
+Route automatically:
+
+- no manifest → start at `preflight`
+- `awaiting_human_approval_before_normalisation` without recorded approval → show the evidence gate
+- `awaiting_human_approval_before_normalisation` with recorded approval → resume at `normalisation`
+- `awaiting_human_review_of_normalised_evidence_and_conflicts` → show the conflict-review gate
+- later approved conflict-review state → resume at `openspec_proposal`
+
+Do not rerun completed stages unless:
+
+- the manifest is missing
+- the manifest is invalid
+- the user explicitly requests a rerun
+- an upstream source file hash changed
 
 ## Deterministic-tool boundaries
 
@@ -49,6 +73,10 @@ The agent must not:
 - create OpenSpec artefacts in this stage
 - write application code
 
+The ingestion-reviewer remains a bounded specialist subagent only.
+
+It must not silently expand permissions or take ownership of later phases.
+
 ## Human approval gates
 
 Stop at the pre-normalisation evidence gate.
@@ -56,6 +84,18 @@ Stop at the pre-normalisation evidence gate.
 Required approval phrase:
 
 `APPROVE ELIGIBLE CIRCUITFIT EVIDENCE FOR NORMALISATION`
+
+This approval authorises only the next bounded phase:
+
+- `normalisation`
+
+It does not authorise:
+
+- conflict resolution approval
+- OpenSpec generation
+- application coding
+- test creation
+- deployment
 
 ## Blocked and deferred evidence handling
 
@@ -76,7 +116,7 @@ The pipeline must write a local-only manifest with:
 - pipeline state
 - resume stage
 
-Expected state after this skill:
+Expected state after the Step 16 ingestion-quality phase:
 
 - `pipeline_state: awaiting_human_approval_before_normalisation`
 - `resume_stage: normalisation`
@@ -97,3 +137,6 @@ After approval in later steps only:
 5. tasks
 6. acceptance criteria
 7. tests
+
+OpenSpec remains blocked until the later conflict-review approval state has been
+recorded.
