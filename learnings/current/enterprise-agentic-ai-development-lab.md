@@ -1121,3 +1121,84 @@ The value is not merely that an AI copilot generated scripts.
 The value is that a product builder used experience and product taste to decide
 which problem to solve, which assumptions to challenge and which experiments to
 run.
+## LP-019: Regulator-Auditable Traceability Is a Product Requirement
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+The traceability model must hold up in a high-risk enterprise environment with
+internal audit, risk oversight and potential regulatory scrutiny.
+
+### Learning Point
+
+Traceability is not merely a debugging convenience.
+
+It must preserve:
+
+`who → did what → against which evidence → using which agent, model, skill and tool → under which permissions → producing which output → approved by whom → released where → linked to which incident`
+
+### Decision
+
+Adopt an audit-grade traceability target with identities, timestamps, hashes,
+versioning, approval records, test evidence, exception handling and
+incident linkage.
+
+## LP-020: OpenCode Is a Runtime, Not One Giant Agent
+
+### Origin
+
+`Product-manager question` and `Copilot explanation`
+
+### Finding
+
+OpenCode should be understood as the runtime and interface hosting agents.
+
+### Learning Point
+
+- agent = worker
+- skill = reusable procedure
+- tool = deterministic executable capability
+- orchestrator = coordinating primary agent
+- subagent = focused specialist
+- `AGENTS.md` = shared project rules
+- ADR = written decision record
+- OpenSpec = later versioned change contract
+
+### Decision
+
+Add a primary Product Manager CoPilot orchestrator and a focused
+`ingestion-reviewer` subagent.
+
+## LP-021: Offline Learning Documents Are a First-Class Deliverable
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+The chat context is too large to remain the only source of learning.
+
+### Learning Point
+
+The repository must function as an offline learning system.
+
+It should preserve:
+
+- README
+- primer guides
+- requirements
+- ADRs
+- checkpoints
+- learning points
+- presentations
+- version history
+- next steps
+
+### Decision
+
+Add a standalone OpenCode operating-model primer and a regulator-auditable
+traceability guide before the first agent-run experiment.

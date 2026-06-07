@@ -1,0 +1,30 @@
+{
+  "run_id": "pmcp-YYYYMMDD-HHMMSS-random",
+  "project_id": "01-doc-to-spec-pilot",
+  "triggered_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "triggered_by": "human-reviewer",
+  "agent_name": "product-manager-copilot",
+  "agent_mode": "primary",
+  "agent_definition_hash": "",
+  "subagents_invoked": [
+    "ingestion-reviewer"
+  ],
+  "model_provider": "",
+  "model_name": "",
+  "model_configuration": {},
+  "skills_loaded": [
+    "product-manager-copilot-ingestion-review"
+  ],
+  "tools_invoked": [],
+  "tool_versions": {},
+  "source_hashes": [],
+  "permissions_effective": {},
+  "local_outputs_generated": [],
+  "sanitised_outputs_generated": [],
+  "warnings": [],
+  "human_review_status": "pending",
+  "approved_by": null,
+  "approval_timestamp_utc": null,
+  "git_commit": null,
+  "token_usage": {}
+}
