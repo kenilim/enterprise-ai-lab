@@ -246,54 +246,6 @@ A reviewer must be able to reconstruct a production issue backwards from:
 
 `incident → release → commit → task → acceptance criterion → story → requirement → evidence → approval`
 
-### REQ-PMCP-016: Background Evidence Processing Jobs
-
-The Product Manager CoPilot should process large evidence packs as background
-jobs rather than requiring a human to approve every low-risk operation.
-
-### REQ-PMCP-017: Progress, Countdown and ETA
-
-The UI should show:
-
-- files completed
-- total files
-- work units completed
-- total work units
-- current stage
-- estimated time remaining
-- confidence range
-- exceptions
-- next human approval gate
-
-### REQ-PMCP-018: Capacity and Resource Metrics
-
-Each processing run should capture:
-
-- wall-clock duration
-- queue time
-- per-stage duration
-- token usage
-- model usage
-- model cost where applicable
-- CPU and memory use
-- GPU utilisation where applicable
-- peak VRAM
-- GPU-hours
-- throughput by file type
-
-### REQ-PMCP-019: Policy-Driven Approval Profiles
-
-The system should support permission profiles that allow low-risk approved
-operations to run automatically while requiring human approval for material
-changes, unapproved tools, OpenSpec proposals, implementation work and
-deployment.
-
-### REQ-PMCP-020: Exception-Based Human Review
-
-Humans should be interrupted for exceptions and approval gates, not every safe
-read or approved deterministic tool call.
-
-
 ## Current Position
 
 Completed:

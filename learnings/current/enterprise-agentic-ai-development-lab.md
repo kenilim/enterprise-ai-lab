@@ -1256,3 +1256,148 @@ Use progressive disclosure:
 
 Treat concise summaries and structured manifests as first-class workflow
 artefacts without discarding the detailed underlying evidence.
+## LP-024: Interactive Review Is a Lab Guardrail, Not the Final Enterprise UX
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+The OpenCode interactive permission flow is useful for learning, debugging and
+first-time validation.
+
+It is not the ideal end-state user experience for a product manager processing
+large enterprise evidence packs.
+
+### Learning Point
+
+The enterprise Product Manager CoPilot should run evidence processing as a
+background job with policy-defined permissions.
+
+Human approval should be required at material gates, not for every low-risk
+read or approved deterministic script.
+
+### Enterprise Pattern
+
+Use:
+
+`background job → policy engine → progress estimator → exception queue → human approval gate`
+
+rather than:
+
+`human manually approves every individual tool call`
+
+## LP-025: Large Enterprise Evidence Packs Need Time and Resource Forecasting
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+Large enterprise programmes may contain hundreds or thousands of files.
+
+The user experience must show expected processing time, progress, queue state
+and resource usage.
+
+### Learning Point
+
+Track both commercial tokenomics and infrastructure resource economics:
+
+- number of files
+- file sizes
+- pages
+- slides
+- sheets
+- images
+- attachments
+- OCR workload
+- wall-clock duration
+- queue waiting time
+- per-stage duration
+- token input, output and cache usage
+- model cost where applicable
+- CPU time
+- memory usage
+- GPU utilisation
+- peak VRAM
+- GPU-hours
+- retries and failures
+- throughput by file type
+
+### Enterprise Pattern
+
+For large jobs, Product Manager CoPilot should support overnight processing,
+scheduled runs and asynchronous notifications.
+
+## LP-026: Progress Should Be Estimated by Work Units, Not File Count Alone
+
+### Origin
+
+`Product-manager insight` and `Copilot recommendation`
+
+### Finding
+
+A simple progress bar based on file count is misleading.
+
+One PDF with OCR-heavy scanned pages may take longer than dozens of clean
+Markdown files.
+
+### Learning Point
+
+Estimate work using weighted units:
+
+| Evidence type | Example weighting signal |
+|---|---|
+| Markdown or text | bytes and lines |
+| DOCX | paragraphs, tables, images |
+| PPTX | slides, tables, embedded images |
+| XLSX | sheets, rows, formulas, tables |
+| PDF | pages, OCR requirement, image density |
+| PNG/JPEG | OCR complexity, resolution |
+| EML | attachments and nested messages |
+
+### Product Implication
+
+The UI should show:
+
+- estimated time remaining
+- confidence range
+- files completed
+- current stage
+- work units completed
+- stage countdown
+- tasks remaining
+- exception count
+- "safe to leave running" status
+
+## LP-027: Permission Strategy Must Evolve From Manual Prompts to Policy Gates
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+Manual permission prompts are painful for long-running enterprise workflows.
+
+### Learning Point
+
+The system needs pre-approved execution profiles.
+
+Examples:
+
+| Profile | Behaviour |
+|---|---|
+| Read-only review | Allow reads, deny writes |
+| Ingestion processing | Allow approved extraction scripts, local logs and sanitised reports |
+| Spec proposal | Allow OpenSpec draft creation, require human approval |
+| Development implementation | Allow bounded code edits, require tests |
+| Release | Require formal approval and deployment controls |
+
+### Decision
+
+Keep strict manual approval in the lab until the toolchain is proven.
+
+Later, define policy-driven background execution with explicit approval gates.
