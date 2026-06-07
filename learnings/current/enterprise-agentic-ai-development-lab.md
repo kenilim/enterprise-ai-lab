@@ -1202,3 +1202,57 @@ It should preserve:
 
 Add a standalone OpenCode operating-model primer and a regulator-auditable
 traceability guide before the first agent-run experiment.
+## LP-022: Logging Is a Product Output, Not a Terminal Scroll
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+Long terminal output is not an effective review interface.
+
+A product manager should not need to scroll through hundreds of lines or paste
+large terminal dumps back into a chat.
+
+### Learning Point
+
+Every meaningful workflow should produce:
+
+`full local log → compact manifest → human-readable summary → sanitised checkpoint → reviewed Git commit`
+
+The full log remains available for troubleshooting and audit reconstruction.
+
+The compact summary becomes the default review object.
+
+### Decision
+
+Add reusable wrapper scripts that generate local logs, manifests and short
+summaries automatically.
+
+## LP-023: Traceability Must Be Usable as Well as Complete
+
+### Origin
+
+`Product-manager insight` and `Copilot recommendation`
+
+### Finding
+
+Regulator-auditable evidence can become operationally unusable if every routine
+review requires raw transcript inspection.
+
+### Learning Point
+
+Use progressive disclosure:
+
+1. summary
+2. manifest
+3. sanitised report
+4. Git diff
+5. full log only when needed
+6. session export only when needed
+
+### Decision
+
+Treat concise summaries and structured manifests as first-class workflow
+artefacts without discarding the detailed underlying evidence.
