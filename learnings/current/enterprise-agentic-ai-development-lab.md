@@ -1452,3 +1452,34 @@ Audit README files at meaningful milestones.
 Update them deliberately after reviewing which files are operational guides,
 which are project summaries and which are intentionally static fixture
 documents.
+
+## LP-030: README Audits Must Distinguish Historical Context From Stale Instructions
+
+### Origin
+
+`Experiment result` and `Copilot recommendation`
+
+### Finding
+
+The README audit correctly found stale project READMEs.
+
+It also flagged the root README because it contained historical references such
+as `Step 14`.
+
+### Learning Point
+
+Historical references are not automatically stale instructions.
+
+README audits should distinguish:
+
+- useful historical context
+- current operating instructions
+- outdated terminology
+- obsolete next-step guidance
+
+### Decision
+
+Preserve history.
+
+Add or refresh an explicit current-checkpoint block rather than destructively
+removing earlier milestones.

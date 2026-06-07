@@ -632,3 +632,10 @@ compact resumption checkpoint before compacting or starting a new chat.
 
 README maintenance is not cosmetic. Audit README files at meaningful milestones
 and update them deliberately after reviewing their intended purpose.
+
+## LP-030: README Audits Must Distinguish Historical Context From Stale Instructions
+
+Historical references are not automatically stale instructions.
+
+Preserve useful history and refresh an explicit current-checkpoint block rather
+than destructively deleting earlier milestones.

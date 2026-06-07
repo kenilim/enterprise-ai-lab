@@ -1,30 +1,47 @@
 # Document-to-Spec Pilot Inputs
 
-## Folder Roles
+## Purpose
 
-### inbox
+This folder separates local working evidence from reviewed synthetic fixtures.
 
-Landing zone for newly received files.
+## Folder Rules
 
-Files placed here are not automatically approved, committed or processed.
+```text
+input/
+├── canonical-source-pack/
+│   └── raw/
+├── generated-synthetic-evidence/
+├── inbox/
+├── processed/
+└── rejected/
+```
 
-### canonical-source-pack/raw
+## Git Safety Rules
 
-Local immutable copy of the approved benchmark source pack.
+Treat these as local-only unless explicitly sanitised and approved:
 
-These raw files remain local and are excluded from GitHub.
+- `canonical-source-pack/raw/`
+- `generated-synthetic-evidence/`
+- `inbox/`
+- extracted outputs
+- local reports
+- runtime logs
 
-### generated-synthetic-evidence
+Reviewed synthetic fixtures intended for public Git live under:
 
-Reproducible artificial enterprise-style evidence generated from the canonical
-source pack.
+```text
+projects/01-doc-to-spec-pilot/fixtures/
+```
 
-Examples may include synthetic emails, meeting notes, spreadsheets, slides,
-PDF summaries, screenshots, stale requirements and conflicting requests.
+## Current Benchmark
 
-## Processing Rule
+The working benchmark is the CircuitFit multi-format synthetic evidence pack.
 
-Raw documents must remain local.
+It exists to test realistic enterprise ingestion rather than clean Markdown-only
+inputs.
 
-Only safe metadata, manifests, scripts, sanitised synthetic fixtures and
-reviewed outputs should be committed to Git.
+## Known Limitations
+
+- Outlook `.msg` ingestion is deferred
+- recursive attachment ingestion remains future work
+- OCR quality needs explicit review

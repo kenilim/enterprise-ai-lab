@@ -2,26 +2,38 @@
 
 ## Purpose
 
-This pilot is part of the Enterprise AI Development Lab.
+This pilot will test the downstream development-agent workflow after the
+document-to-spec pipeline is sufficiently reliable.
 
-## Project Boundary
+## Current Status
 
-This folder is a separate Git repository so that:
+```text
+OpenSpec core workflow initialised
+→ no Product Manager CoPilot implementation proposal generated yet
+→ waiting for Step 16 extraction-quality remediation
+→ waiting for evidence normalisation and conflict detection
+```
 
-- specifications are versioned independently
-- code changes are traceable
-- OpenCode usage can be measured per project
-- document-processing logs remain correlated to this pilot
+## Planned Handoff
 
-## Human Approval Rule
+```text
+approved evidence register
+→ conflict review
+→ OpenSpec proposal
+→ design
+→ user stories
+→ acceptance criteria
+→ tasks
+→ bounded development-agent implementation
+→ tests
+→ traceability review
+```
 
-No draft specification becomes an approved specification automatically.
+## Current Rule
 
-The intended flow is:
+Do not begin application implementation until:
 
-input/inbox
-→ local parsing
-→ local model draft
-→ Git diff
-→ human review
-→ specs/approved
+1. evidence-quality gaps are reviewed
+2. normalisation is complete
+3. conflicts are surfaced
+4. the product manager approves the OpenSpec proposal

@@ -1,41 +1,65 @@
-# Evergreen Learning Documents
+# Product Manager CoPilot Learning System
 
 ## Purpose
 
-This folder stores the evolving documentation for the Enterprise Agentic AI
-Development Lab.
+This folder is the offline learning system for the Product Manager CoPilot lab.
 
-## Structure
+It exists so the product builder, colleagues and future agents can understand
+the journey without reopening the original chat transcript.
 
-### current
+## Current Position
 
-Contains the latest editable Markdown source:
+```text
+Step 15E.4 complete
+→ whitepaper imported
+→ compaction checkpoint preserved
+→ README refresh audited
 
-`current/enterprise-agentic-ai-development-lab.md`
+Current action
+→ refresh repository README files
 
-### exports
+Next
+→ Step 16 extraction-quality remediation and quality-gate matrix
+```
 
-Contains immutable milestone snapshots in Markdown, Word and PDF formats.
+## Folder Guide
 
-### archive
+```text
+learnings/
+├── current/
+│   ├── enterprise-agentic-ai-development-lab.md
+│   └── product-manager-copilot-resume-after-compaction_latest.md
+├── exports/
+│   ├── whitepapers/
+│   ├── bundles/
+│   └── historical checkpoint exports
+└── README.md
+```
 
-Contains superseded files when manual archival is needed.
+## What to Read First
 
-## Filename Convention
+1. `current/product-manager-copilot-resume-after-compaction_latest.md`
+2. `current/enterprise-agentic-ai-development-lab.md`
+3. `exports/whitepapers/product-manager-copilot-enterprise-agentic-ai-lab-whitepaper_v1.0_checkpoint-step15e3.md`
 
-`enterprise-agentic-ai-development-lab_v<version>_checkpoint-<step>_<status>_<YYYYMMDD_HHMMSS>.<extension>`
+## Documentation Principle
 
-## Update Rule
+At meaningful milestones:
 
-Update the report after each meaningful learning point, architecture decision,
-validated experiment or major change in direction.
+```text
+learning point
+→ checkpoint
+→ whitepaper snapshot where useful
+→ Git commit
+→ next bounded step
+```
 
-The report should always record:
+## Attribution Convention
 
-- the complete learning roadmap
-- the current checkpoint
-- completed experiments
-- failures and root causes
-- open-source and air-gap implications
-- token usage by project
-- the next planned action
+Learning points should identify one or more origins:
+
+- `Product-manager insight`
+- `Copilot recommendation`
+- `Experiment result`
+- `Known limitation`
+- `Decision`

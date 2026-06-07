@@ -1,46 +1,42 @@
-# Enterprise Project Intelligence Workspace Presentation
-
-## Current Presentation
-
-Versioned snapshot:
-
-`enterprise-project-intelligence-workspace-presentation_v0.1.html`
-
-Stable latest copy:
-
-`enterprise-project-intelligence-workspace-presentation_latest.html`
+# Product Manager CoPilot Presentation
 
 ## Purpose
 
-This self-contained 16:9 HTML presentation explains:
+This folder contains offline HTML presentations for sharing the Product Manager
+CoPilot lab with colleagues.
 
-- the enterprise information-fragmentation problem
-- hallucination risks caused by incomplete retrieval
-- the proposed project-intelligence workspace
-- the air-gapped enterprise architecture
-- the personal-lab environment
-- installed open-source components
-- completed experiments
-- the roadmap
+The deck is a condensed, visual version of the README, whitepaper, ADRs,
+checkpoints and learning points.
 
-## Usage
+## Latest Deck
 
-Open the HTML file in a browser.
+```text
+presentations/product-manager-copilot-presentation_latest.html
+```
 
-Controls:
+Latest versioned deck:
 
-- Right arrow, Down arrow, Space or Page Down: next slide
-- Left arrow, Up arrow or Page Up: previous slide
-- Home: first slide
-- End: last slide
-- F: fullscreen
-- Print / PDF button: export PDF snapshot
+```text
+presentations/product-manager-copilot-presentation_v0.8.html
+```
 
-## Update Rule
+## Current Narrative
 
-When the evergreen report changes meaningfully:
+The presentation explains:
 
-1. generate a new versioned HTML presentation
-2. update the stable `latest` copy
-3. commit both files
-4. push to GitHub
+- the fragmented-enterprise-evidence problem
+- why missing retrieval creates hallucinated requirements
+- the Product Manager CoPilot north-star vision
+- Docling, fallback extraction, OpenCode and OpenSpec roles
+- regulator-auditable traceability
+- interactive review versus background execution
+- token, time and GPU-resource metrics
+- policy-driven approval gates
+- the role of product judgement and AI-copilot teaching
+
+## Offline Use
+
+Open the latest HTML file directly in a browser.
+
+The presentation is designed for 16:9 display and does not require a running
+development environment.

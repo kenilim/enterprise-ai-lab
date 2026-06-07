@@ -2,26 +2,62 @@
 
 ## Purpose
 
-This pilot is part of the Enterprise AI Development Lab.
+This pilot tests how Product Manager CoPilot can ingest fragmented enterprise
+evidence and convert it into grounded, reviewable inputs before OpenSpec
+generation begins.
 
-## Project Boundary
+## Current Learning Phase
 
-This folder is a separate Git repository so that:
+```text
+multi-format extraction completed
+→ first agent-assisted ingestion review completed
+→ quality gaps identified
+→ extraction-quality remediation next
+```
 
-- specifications are versioned independently
-- code changes are traceable
-- OpenCode usage can be measured per project
-- document-processing logs remain correlated to this pilot
+Do **not** generate OpenSpec artefacts yet.
 
-## Human Approval Rule
+## Current Benchmark
 
-No draft specification becomes an approved specification automatically.
+The CircuitFit synthetic enterprise evidence pack contains:
 
-The intended flow is:
+- Markdown
+- TXT
+- CSV
+- EML
+- DOCX
+- XLSX
+- PPTX
+- PDF
+- PNG screenshots
+- PNG whiteboard-style image
 
-input/inbox
-→ local parsing
-→ local model draft
-→ Git diff
-→ human review
-→ specs/approved
+## Current Quality Gaps
+
+- XLSX needs workbook-aware fallback inspection
+- PPTX needs slide-aware fallback inspection
+- PDF reading order needs explicit validation
+- screenshot OCR is noisy
+- whiteboard PNG failed the current quality gate
+- Outlook `.msg` remains deferred
+
+## Folder Guide
+
+```text
+projects/01-doc-to-spec-pilot/
+├── config/
+├── fixtures/
+├── input/
+├── manifests/
+├── output/
+├── specs/
+├── src/
+├── tests/
+└── work/
+```
+
+## Data Boundary
+
+Public Git contains only reviewed synthetic fixtures and sanitised summaries.
+
+Local raw evidence, extraction output and detailed logs remain outside Git.
