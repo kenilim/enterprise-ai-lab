@@ -1,0 +1,8 @@
+[2026-06-04 10:01] PM: We need something testable quickly. Can we stay browser-only?
+[2026-06-04 10:03] Engineer: Yes. localStorage is enough for the MVP. No backend.
+[2026-06-04 10:04] Designer: Mobile browser first. Keep the first screen simple.
+[2026-06-04 10:06] PM: What about AI?
+[2026-06-04 10:07] Engineer: AI-generated workout text can come later. Use deterministic templates first so the beta is reliable.
+[2026-06-04 10:09] Marketing: We should still show a leaderboard concept in the deck.
+[2026-06-04 10:11] PM: Concept only, not MVP scope. Please capture as a future option.
+[2026-06-04 10:15] Security: Agree. No account data, no cloud sync, no social sharing in MVP.
