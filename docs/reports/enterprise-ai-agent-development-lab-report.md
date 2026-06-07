@@ -156,3 +156,24 @@ supported through the ChatGPT-account route.
 
 The enterprise lesson is that every model-provider-authentication combination
 requires an active validation test.
+
+### LP-011: OpenSpec Core Workflow Initialised
+
+OpenSpec has been installed and initialised inside:
+
+`projects/02-app-build-pilot`
+
+The generated OpenCode core workflow contains:
+
+- `opsx-propose`
+- `opsx-explore`
+- `opsx-apply`
+- `opsx-sync`
+- `opsx-archive`
+
+OpenSpec now provides the structured handoff layer:
+
+`approved intent → proposal → specs → design → tasks → human review → implementation → archive`
+
+The initial empty OpenSpec directories were preserved with `.gitkeep`
+placeholders so that the baseline structure remains visible in Git.
