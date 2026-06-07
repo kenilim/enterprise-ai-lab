@@ -10,37 +10,36 @@ the journey without reopening the original chat transcript.
 ## Current Position
 
 ```text
-Step 15E.4 complete
-→ whitepaper imported
-→ compaction checkpoint preserved
-→ README refresh audited
+Step 16K.2 in progress
+→ canonical knowledge spine drafted
+→ learning content merged into canonical journal
+→ current-state retrieval simplified
 
 Current action
-→ refresh repository README files
+→ review consolidation diff
 
 Next
-→ Step 16 extraction-quality remediation and quality-gate matrix
+→ Step 16R3 deterministic fallback-inspection scope
 ```
 
 ## Folder Guide
 
 ```text
 learnings/
+├── LEARNING_JOURNAL.md
 ├── current/
-│   ├── enterprise-agentic-ai-development-lab.md
-│   └── product-manager-copilot-resume-after-compaction_latest.md
 ├── exports/
-│   ├── whitepapers/
-│   ├── bundles/
-│   └── historical checkpoint exports
+│   └── historical exports and bundles
+├── archive/
 └── README.md
 ```
 
 ## What to Read First
 
-1. `current/product-manager-copilot-resume-after-compaction_latest.md`
-2. `current/enterprise-agentic-ai-development-lab.md`
-3. `exports/whitepapers/product-manager-copilot-enterprise-agentic-ai-lab-whitepaper_v1.0_checkpoint-step15e3.md`
+1. `LEARNING_JOURNAL.md`
+2. `../docs/CURRENT_STATE.md`
+3. `../docs/README.md`
+4. `current/enterprise-agentic-ai-development-lab.md` only when broader historical narrative is needed
 
 ## Documentation Principle
 
@@ -48,11 +47,18 @@ At meaningful milestones:
 
 ```text
 learning point
+→ canonical journal entry
 → checkpoint
 → whitepaper snapshot where useful
 → Git commit
 → next bounded step
 ```
+
+Do not keep multiplying step-specific learning files unless a milestone needs a
+separate durable record.
+
+Raw transcripts, local runtime logs and detailed local extraction output remain
+outside Git.
 
 ## Attribution Convention
 

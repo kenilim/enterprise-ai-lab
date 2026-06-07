@@ -58,6 +58,10 @@ The risk chain is:
 The lab must remain understandable and executable by a product manager with
 limited current coding knowledge.
 
+The default interaction model for this persona should be OpenCode-first, with
+deterministic scripts sitting behind approved tools and workflows rather than
+becoming the normal day-to-day interface.
+
 ### REQ-LJ-002: Open-Source-First and Air-Gap-Ready Design
 
 The majority of the architecture should use open-source or replaceable
@@ -73,6 +77,13 @@ review changes, commit, push and confirm a clean tree.
 
 Maintain README, ADRs, checkpoints, reports, requirements, presentations,
 version history and roadmap.
+
+Major learning points should be captured in detailed repo-local Markdown so the
+repository remains the durable handoff surface.
+
+Major validated learning points should be appended to the canonical
+`learnings/LEARNING_JOURNAL.md` unless a milestone clearly needs a separate
+durable record.
 
 ### REQ-LJ-005: Safe Public Repository
 
@@ -199,6 +210,22 @@ A future reviewer should not need the original chat transcript to understand:
 - limitations
 - current position
 - next action
+
+Sanitised review bundles, detailed learning records and checkpoints should live
+inside the repository as Git-safe Markdown artefacts.
+
+Local raw logs, transcripts and detailed local extraction outputs remain
+excluded from Git under local-only folders.
+
+Another authorised user should be able to continue from the latest repo-local
+checkpoint, review bundle and learning record without depending on private chat
+history.
+
+Humans and agents should resume from canonical repo-local files rather than from
+the largest available collection of Markdown.
+
+Documentation entropy must be controlled so stale or duplicate summaries do not
+become retrieval noise or hallucination risk.
 
 ### REQ-PMCP-012: Regulator-Auditable Agent Runs
 

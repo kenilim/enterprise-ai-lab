@@ -2,9 +2,9 @@
 
 Open-source-first, air-gap-ready evidence-to-application workflow for enterprise agentic product development.
 
-> **Current checkpoint:** Step 14D complete  
-> **Status:** Local Docling DOCX smoke test completed. Multi-format synthetic enterprise benchmark is the next step.  
-> **Repository:** `kenilim/enterprise-ai-lab`  
+> **Current checkpoint:** Step 16K.2 knowledge consolidation prepared for review
+> **Status:** Canonical knowledge spine drafted so humans and agents can resume from repo-local source-of-truth files. Extraction-quality remediation resumes after this consolidation review.
+> **Repository:** `kenilim/enterprise-ai-lab`
 > **Primary audience:** Colleagues evaluating enterprise AI development agents in restricted or air-gapped environments.
 
 ---
@@ -36,6 +36,18 @@ This does **not** replace software-engineering expertise.
 It does show that product builders can independently research, prototype and
 evaluate more of the delivery stack than before, provided the requirements,
 controls and human-review gates are clear.
+
+The default interaction model in the current lab phase is OpenCode-first for the
+product-manager persona.
+
+Resume from the canonical repo-local files under:
+
+- `docs/README.md`
+- `docs/CURRENT_STATE.md`
+- `learnings/LEARNING_JOURNAL.md`
+
+Use this root README as the high-level overview, not as the default current-state
+handoff file.
 
 The north-star product is now called:
 

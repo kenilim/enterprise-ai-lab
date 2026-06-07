@@ -4,6 +4,8 @@
 
 Define how Product Manager CoPilot agent runs should be recorded and reviewed.
 
+The WSL repository is the primary project boundary for this lab.
+
 The terminal is a runtime interface.
 
 It is not the durable audit artefact and it should not be the main review
@@ -31,8 +33,9 @@ Do not require a human reviewer to scroll through hundreds of terminal lines.
 | OpenCode session record | User prompts, agent responses and tool interaction context | Local only | Detailed investigation |
 | Local full-run log | Complete wrapper-script output | Local only | Technical review |
 | Agent-run manifest | Structured run identity, model, skills, tools, hashes, warnings and approval state | Local only | Audit reconstruction |
-| Human-readable summary | Concise review output and next action | Local first; sanitise before commit | Product manager |
-| Sanitised checkpoint | Safe public learning record | GitHub after human review | Colleagues |
+| Human-readable summary | Concise review output and next action | Repo-local Git-safe Markdown after sanitisation; local-only drafts allowed temporarily | Product manager |
+| Canonical current-state and journal docs | Durable restart and learning memory | Repo-local Git-safe Markdown | Product manager, colleagues, agents |
+| Sanitised checkpoint | Safe public learning record | Repo-local Markdown, then GitHub after human review | Colleagues |
 | Git commit | Approved durable change record | GitHub after human review | Historical trace |
 
 ## Local Paths
@@ -48,6 +51,8 @@ projects/01-doc-to-spec-pilot/output/reports/
 
 These remain local-only.
 
+Treat local logs as audit evidence, not default retrieval context.
+
 ## Public Paths
 
 Use:
@@ -55,9 +60,17 @@ Use:
 ```text
 docs/reports/
 docs/checkpoints/
+learnings/current/
+learnings/exports/bundles/
+learnings/LEARNING_JOURNAL.md
+docs/CURRENT_STATE.md
 ```
 
 Only sanitised, reviewed outputs may be committed.
+
+Windows Downloads or similar local export folders may be used for temporary
+convenience only. They are not the primary shared handoff location for project
+review artefacts, and they are outside the default WSL repo knowledge boundary.
 
 ## Naming Convention
 
@@ -86,6 +99,13 @@ It does not replace the agent-run manifest.
 ## Human Review Rule
 
 The default review object is the compact summary file.
+
+Where the summary is useful as an ongoing project artefact, store the sanitised
+version inside the repository so another authorised reviewer can continue after
+cloning or pulling the repo.
+
+Prefer canonical restart and journal files over creating many new one-off bundle
+documents.
 
 The full log and transcript should be opened only when:
 
