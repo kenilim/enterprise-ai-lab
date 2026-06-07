@@ -1401,3 +1401,54 @@ Examples:
 Keep strict manual approval in the lab until the toolchain is proven.
 
 Later, define policy-driven background execution with explicit approval gates.
+
+## LP-028: Whitepaper Snapshots Are Compaction Boundaries
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+A long learning conversation should not remain the only usable source of truth.
+
+### Learning Point
+
+At meaningful architectural milestones, create an offline whitepaper and a
+compact resumption checkpoint before compacting or starting a new chat.
+
+### Decision
+
+Store immutable whitepaper exports under:
+
+`learnings/exports/whitepapers/`
+
+Store the latest resumption checkpoint under:
+
+`learnings/current/`
+
+## LP-029: README Files Need a Maintenance Cadence
+
+### Origin
+
+`Product-manager insight`
+
+### Finding
+
+Repository README files become stale as the architecture, terminology and
+learning phase evolve.
+
+### Learning Point
+
+README maintenance is not cosmetic.
+
+A stale README makes the repository harder to understand offline and creates a
+risk that future agents or colleagues act on outdated instructions.
+
+### Decision
+
+Audit README files at meaningful milestones.
+
+Update them deliberately after reviewing which files are operational guides,
+which are project summaries and which are intentionally static fixture
+documents.

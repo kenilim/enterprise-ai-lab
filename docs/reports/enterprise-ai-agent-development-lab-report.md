@@ -622,3 +622,13 @@ Examples:
 Keep strict manual approval in the lab until the toolchain is proven.
 
 Later, define policy-driven background execution with explicit approval gates.
+
+## LP-028: Whitepaper Snapshots Are Compaction Boundaries
+
+At meaningful architectural milestones, create an offline whitepaper and a
+compact resumption checkpoint before compacting or starting a new chat.
+
+## LP-029: README Files Need a Maintenance Cadence
+
+README maintenance is not cosmetic. Audit README files at meaningful milestones
+and update them deliberately after reviewing their intended purpose.
