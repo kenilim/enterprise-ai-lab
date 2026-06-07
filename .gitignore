@@ -55,3 +55,10 @@ Thumbs.db
 *.safetensors
 *.bin
 models/
+
+# Local canonical evidence and generated fixtures awaiting review
+**/input/canonical-source-pack/raw/**
+**/input/generated-synthetic-evidence/**
+
+# Preserve folder placeholders
+!**/input/generated-synthetic-evidence/.gitkeep
